@@ -28,7 +28,6 @@ button {
     cursor: pointer;
     font-size: 16px;
 }
-
 button:hover{
     box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
 }
@@ -36,46 +35,6 @@ button a {
 	text-decoration: none;
 	color: #fff
 }
-
-/* Clear floats */
-.btm_buttons::after {
-    content: "";
-    clear: both;
-    display: table;
-}
-
-.btm_buttons{
-    margin-bottom: 10px
-}
-/* Extra styles for the cancel button */
-.cancelbtn {
-    background-color: #f44336;
-}
-
-/* Float cancel and signup buttons and add an equal width */
-.cancelbtn,.signupbtn{
-    float: left;
-    width: 50%;
-}
-
-.cancelbtn:hover,.signupbtn:hover{
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-}
-
-/* Change styles for cancel button and signup button on extra small screens */
-@media screen and (max-width: 300px) {
-    .cancelbtn, .signupbtn {
-        width: 100%;
-    }
-}
-
-/* Add padding to container elements */
-.container {
-    padding: 2px 16px;
-    width: 50%;
-    margin: auto;
-}
-
 /* Make form appear with card effect*/
 .card{
 	width: 50%;
@@ -89,7 +48,6 @@ button a {
 .card:hover {
     box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
 }
-
 .form-header {
     height: 60px;
     padding: 20px 30px 0;
@@ -97,4 +55,50 @@ button a {
 }
 .form-body {
     padding: 30px 30px 30px;
+}
+
+/* Extra styles for the cancel button */
+.cancelbtn {
+    background-color: #f44336;
+}
+.deletebtn {
+    background-color: #f44336;
+    float: left;
+    width: 30%;
+    margin: 8px 10px;
+}
+.updatebtn{
+    background-color: #ffbe28;
+    float: right;
+    width: 30%;
+    margin: 8px 10px;
+}
+/* Float cancel and signup buttons and add an equal width */
+.cancelbtn,.signupbtn, .loginbtn {
+    float: left;
+    width: 50%;
+}
+
+.cancelbtn,.signupbtn:hover, .deletebtn {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+/* Add padding to container elements */
+.container {
+    padding: 2px 16px;
+    width: 50%;
+    margin: auto;
+}
+/* Clear floats */
+.btm_buttons::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+/* Change styles for cancel button and signup button on extra small screens */
+@media screen and (max-width: 300px) {
+    .cancelbtn, .signupbtn {
+        width: 100%;
+    }
 }

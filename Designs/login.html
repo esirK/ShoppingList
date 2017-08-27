@@ -3,13 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100" rel="stylesheet">
+    <link rel="stylesheet" href="main.css">
 </head>
 <body>
-<form>
-    <div>
-        <h4>Please Login</h4>
+<form class="card" action="bucketlist.html">
+    <div class="form-header">
+        <h4 class="title">Please Login</h4>
     </div>
-    <div>
+    <div class="container">
         <label><b>Email</b></label>
         <input type="text" placeholder="Enter Email" name="email" required>
 
@@ -18,9 +20,9 @@
 
         <input type="checkbox" checked="checked"> Remember me
 
-        <div>
-            <button type="button">Cancel</button>
-            <button type="submit">Login</button>
+        <div class="btm_buttons">
+            <button type="button"  class="cancelbtn">Cancel</button>
+            <button type="submit" class="loginbtn">Login</button>
         </div>
     </div>
 </form>
