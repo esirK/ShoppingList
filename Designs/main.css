@@ -57,6 +57,11 @@ button a {
     padding: 30px 30px 30px;
 }
 
+h2 {
+    text-align: center;
+    {font-family: "Karma", sans-serif}
+}
+
 /* Extra styles for the cancel button */
 .cancelbtn {
     background-color: #f44336;
@@ -64,24 +69,9 @@ button a {
 .deletebtn {
     background-color: #f44336;
     float: left;
-    width: 50%;
+    width: 30%;
     margin: 8px 10px;
 }
-
-.view-btn {
-    float: left;
-    width: 40%;
-    margin: 8px 10px;
-}
-
-
-.newbtn {
-    float: right;
-    width: 40%;
-    margin: 8px 10px;
-    background-color: #ffbe28;
-}
-
 .updatebtn{
     background-color: #ffbe28;
     float: right;
@@ -89,7 +79,7 @@ button a {
     margin: 8px 10px;
 }
 /* Float cancel and signup buttons and add an equal width */
-.cancelbtn,.signupbtn, .loginbtn, {
+.cancelbtn,.signupbtn, .loginbtn {
     float: left;
     width: 50%;
 }
@@ -110,20 +100,17 @@ button a {
     clear: both;
     display: table;
 }
+/* Buttons Section */
+.view-btn {
+    width: 30%;
+    margin-bottom: 0px;
+    background: #7dc855;
+    margin: 8px 10px;
+}
 
 /* Change styles for cancel button and signup button on extra small screens */
 @media screen and (max-width: 300px) {
     .cancelbtn, .signupbtn {
         width: 100%;
     }
-
-#fixedheader {
-	position:fixed;
-	top:0px;
-	left:0px;
-	width:30%;
-	color:#CCC;
-	background:#333;
-	padding:20px;
-}
 }
