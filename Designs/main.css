@@ -64,9 +64,24 @@ button a {
 .deletebtn {
     background-color: #f44336;
     float: left;
-    width: 30%;
+    width: 50%;
     margin: 8px 10px;
 }
+
+.view-btn {
+    float: left;
+    width: 40%;
+    margin: 8px 10px;
+}
+
+
+.newbtn {
+    float: right;
+    width: 40%;
+    margin: 8px 10px;
+    background-color: #ffbe28;
+}
+
 .updatebtn{
     background-color: #ffbe28;
     float: right;
@@ -74,7 +89,7 @@ button a {
     margin: 8px 10px;
 }
 /* Float cancel and signup buttons and add an equal width */
-.cancelbtn,.signupbtn, .loginbtn {
+.cancelbtn,.signupbtn, .loginbtn, {
     float: left;
     width: 50%;
 }
@@ -101,4 +116,14 @@ button a {
     .cancelbtn, .signupbtn {
         width: 100%;
     }
+
+#fixedheader {
+	position:fixed;
+	top:0px;
+	left:0px;
+	width:30%;
+	color:#CCC;
+	background:#333;
+	padding:20px;
+}
 }
