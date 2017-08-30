@@ -1,3 +1,6 @@
+from app.Exceptions import UserAlreadyExist, UserDoesNotExist
+
+
 class Account(object):
     """ Creates an Account where users can be stored"""
 
@@ -6,12 +9,18 @@ class Account(object):
 
     def create_user(self, user):
         """ This Method Creates a User and adds him/her into dict of users """
-        self.users.update({user.email: user})
+        if user.email in self.users:
+            raise UserAlreadyExist
+        else:
+            self.users.update({user.email: user})
 
     def rm_user(self, email):
         """ This Method removes a user from users dictionary using his/her 
         unique email"""
-        self.users.pop(email)
+        try:
+            self.users.pop(email)
+        except KeyError:
+            raise UserDoesNotExist
 
     def all_users(self):
         return self.users
