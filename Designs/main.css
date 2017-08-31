@@ -81,7 +81,9 @@ h2 {
 /* Float cancel and signup buttons and add an equal width */
 .cancelbtn,.signupbtn, .loginbtn {
     float: left;
-    width: 50%;
+    margin-left: 5px;
+    margin-right: 5px;
+    width: 40%;
 }
 
 .cancelbtn,.signupbtn:hover, .deletebtn {
@@ -93,6 +95,11 @@ h2 {
     padding: 2px 16px;
     width: 50%;
     margin: auto;
+}
+.btm_buttons {
+    overflow: auto;
+    height: 50px;
+    width: 415px;
 }
 /* Clear floats */
 .btm_buttons::after {
