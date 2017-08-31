@@ -114,6 +114,13 @@ h2 {
     background: #7dc855;
     margin: 8px 10px;
 }
+.new-btn {
+    width: auto;
+    margin-bottom: 0px;
+    background: #7dc855;
+    margin: 8px 10px;
+    float:right;
+}
 
 /* Change styles for cancel button and signup button on extra small screens */
 @media screen and (max-width: 300px) {

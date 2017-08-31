@@ -2,31 +2,111 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Dashboard</title>
+    <title>ShoppingList</title>
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100" rel="stylesheet">
     <link rel="stylesheet" href="main.css">
 </head>
 <body>
-<div id="fixedheader">Logout</div>
-
-<div class="card">
-            <form>
+<form action="create_shoppinglist.html">
+    <div class="items-container">
+        <div class="form-header">
+            <h2 class="title">Awesome ShoppingList App</h2>
+        </div>
+        <div class="card">
+            <button type="submit" class="new-btn"><a href="create_shoppinglist.html"  >Create A ShoppingList</a></button>
+            <form action="view_shoppinglist.html">
                 <div class="form-header">
-                    <h4 class="title">Username</h4>
+                    <h4 class="title">Nakkumart Supermarket</h4>
                 </div>
                 <div class="form-body">
                     <ol>
-                        You Currently Have the following Shopping lists
-                        <li>Nakumart Supermarket.</li>
-                        <li>Turskys Supermarket</li>
-                        <li>Mtaani Supermarket</li>
+                        <ol><strong>Grocery.</strong>
+                            <li>Bananas</li>
+                            <li>Mangoes</li>
+                            <li>Apples</li>
+                        </ol>
+
+                        <ol><strong>Electronics.</strong>
+                            <li>Radio</li>
+                            <li>Power Adapters</li>
+                            <li>TV cord</li>
+                        </ol>
+                        <ol><strong>General</strong>
+                            <li>Basketball</li>
+                            <li>Swimming Kits</li>
+                            <li>The 48 Laws of Power Book</li>
+                        </ol>
                     </ol>
                     <!-- Buttons -->
                     <button type="submit" class="view-btn"><a href="#">View</a></button>
-                    <button type="submit" class="newbtn"><a href="#">Add new ShoppingList</a></button>
+                    <button type="submit" class="deletebtn"><a href="#">Delete</a></button>
+                    <button type="submit" class="updatebtn"><a href="#">Update</a></button>
                 </div>
             </form>
         </div>
+        <div class="card">
+            <form action="view_shoppinglist.html">
+                <div class="form-header">
+                    <h4 class="title">CleanShelf Supermarket</h4>
+                </div>
+                <div class="form-body">
+                    <ol>
+                        <ol><strong>Grocery.</strong>
+                            <li>Bananas</li>
+                            <li>Mangoes</li>
+                            <li>Apples</li>
+                        </ol>
 
+                        <ol><strong>Electronics.</strong>
+                            <li>Radio</li>
+                            <li>Power Adapters</li>
+                            <li>TV cord</li>
+                        </ol>
+                        <ol><strong>General</strong>
+                            <li>Basketball</li>
+                            <li>Swimming Kits</li>
+                            <li>The 48 Laws of Power Book</li>
+                        </ol>
+                    </ol>
+                    <!-- Buttons -->
+                    <button type="submit" class="view-btn"><a href="#">View</a></button>
+                    <button type="submit" class="deletebtn"><a href="#">Delete</a></button>
+                    <button type="submit" class="updatebtn"><a href="#">Update</a></button>
+                </div>
+            </form>
+        </div>
+        <div class="card">
+            <form action="view_shoppinglist.html">
+                <div class="form-header">
+                    <h4 class="title">Tuskys Supermarket</h4>
+                </div>
+                <div class="form-body">
+                    <ol>
+                        <ol><strong>Furniture.</strong>
+                            <li>Sofa Set</li>
+                            <li>Bed</li>
+                            <li>Baby Cot</li>
+                        </ol>
+
+                        <ol><strong>Hardware.</strong>
+                            <li>Wheelbarrow</li>
+                            <li>Bike</li>
+                            <li>Shovel</li>
+                        </ol>
+                        <ol><strong>General</strong>
+                            <li>Basketball</li>
+                            <li>Swimming Kits</li>
+                            <li>The 48 Laws of Power Book</li>
+                        </ol>
+                    </ol>
+                    <!-- Buttons -->
+                    <button type="submit" class="view-btn"><a href="#">View</a></button>
+                    <button type="submit" class="deletebtn"><a href="#">Delete</a></button>
+                    <button type="submit" class="updatebtn"><a href="#">Update</a></button>
+                </div>
+            </form>
+        </div>
+    </div>
+</form>
 </body>
 </html>
