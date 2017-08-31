@@ -1,8 +1,8 @@
 import unittest
 
 from app.Exceptions import ItemDoesNotExist, ItemAlreadyExist
-from app.ShoppingList import ShoppingList
-from app.item import Item
+from app.models.ShoppingList import ShoppingList
+from app.models.item import Item
 
 
 class TestShoppingList(unittest.TestCase):

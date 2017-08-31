@@ -1,8 +1,8 @@
 import unittest
 
 from app.Exceptions import UserAlreadyExist, UserDoesNotExist
-from app.account import Account
-from app.user import User
+from app.models.account import Account
+from app.models.user import User
 
 
 class TestAccount(unittest.TestCase):

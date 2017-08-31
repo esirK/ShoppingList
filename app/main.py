@@ -1,10 +1,10 @@
 from flask import Flask, render_template, url_for, request
 from flask_bootstrap import Bootstrap
-from flask_login import LoginManager, login_user, login_required, current_user
+from flask_login import LoginManager, login_user, current_user
 from werkzeug.utils import redirect
 
-from app.account import Account
-from app.user import User
+from app.models.account import Account
+from app.models.user import User
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = "wireless"
@@ -30,9 +30,9 @@ def index():
 
 @app.route("/login", methods=['GET', 'POST'])
 def login():
-    print(request.method)
+    if current_user.is_authenticated:
+        return redirect(url_for('index'))
     if request.method == 'POST':
-        print(len(account.users))
         user = account.check_user(request.form['email'])
         if user:
             # A User Exist with that Email now check password
