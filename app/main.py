@@ -1,9 +1,8 @@
-from flask import Flask, render_template, url_for, session, request, flash, g
+from flask import Flask, render_template, url_for, request
 from flask_bootstrap import Bootstrap
 from werkzeug.utils import redirect
 
 from app.account import Account
-from app.forms import LoginForm, SignUpForm
 from app.user import User
 
 app = Flask(__name__)
