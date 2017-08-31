@@ -1,7 +1,10 @@
-class User:
+from flask_login import UserMixin
+
+
+class User(UserMixin):
     def __init__(self, name, email, password):
         self.name = name
-        self.email = email
+        self.id = email
         self.password = password
         self.shopping_lists = {}
 
