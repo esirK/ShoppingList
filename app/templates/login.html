@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static',filename='main.css') }}">
+</head>
+<body>
+<form class="card" method="post">
+    <div class="form-header">
+        <h4 class="title">Please Login</h4>
+    </div>
+    <div class="container">
+        <label><b>Email</b></label>
+        <input type="text" placeholder="Enter Email" name="email" required>
+
+        <label><b>Password</b></label>
+        <input type="password" placeholder="Enter Password" name="psw" required>
+
+        <input type="checkbox" checked="checked"> Remember me
+
+        <div class="btm_buttons">
+            <button type="button"  class="cancelbtn">Cancel</button>
+            <button type="submit" class="loginbtn">Login</button>
+        </div>
+    </div>
+</form>
+</body>
+</html>
