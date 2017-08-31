@@ -1,4 +1,4 @@
-from app.Exceptions import ItemDoesNotExist, ItemAlreadyExist
+from app.app.Exceptions import ItemDoesNotExist, ItemAlreadyExist
 
 
 class ShoppingList:
