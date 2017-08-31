@@ -22,5 +22,9 @@ class Account(object):
         except KeyError:
             raise UserDoesNotExist
 
+    def check_user(self, email):
+        if email in self.users:
+            return self.users[email]
+
     def all_users(self):
         return self.users
