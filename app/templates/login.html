@@ -21,10 +21,11 @@
         <input type="checkbox" checked="checked"> Remember me
 
         <div class="btm_buttons">
-            <button type="button"  class="cancelbtn">Cancel</button>
+            <button type="button"  class="cancelbtn" onclick="history.back()">Cancel</button>
             <button type="submit" class="loginbtn">Login</button>
         </div>
     </div>
+<p style="margin: 10px; width: auto; padding: 12px 20px; " align="center" ><a href="{{ url_for('signup') }}">No Account? Sign Up</a></p>
 </form>
 </body>
 </html>
