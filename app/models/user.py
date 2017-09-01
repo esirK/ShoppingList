@@ -8,6 +8,9 @@ class User(UserMixin):
         self.password = password
         self.shopping_lists = {}
 
+    def __name__(self):
+        return self.name
+
     def create_shopping_lst(self, shopping_lst):
         """' This Method adds shopping_list into the current user shopping lists"""
         self.shopping_lists.update({shopping_lst.name: shopping_lst})
