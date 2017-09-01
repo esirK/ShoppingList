@@ -20,3 +20,4 @@ meeting the needs of keeping track of their shopping lists.
 Set the FLASK_APP and FLASK_CONFIG variables as follows:
 * export FLASK_APP=run.py
 * export FLASK_CONFIG=development
+run the app with the command: `flask run`
