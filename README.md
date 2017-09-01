@@ -17,7 +17,4 @@ meeting the needs of keeping track of their shopping lists.
 5. Install the required packages: 
 > `pip install -r requirements.txt`
 ### Launching the App
-Set the FLASK_APP and FLASK_CONFIG variables as follows:
-* export FLASK_APP=run.py
-* export FLASK_CONFIG=development
-run the app with the command: `flask run`
+run the app with the command: `python run.py runserver`
