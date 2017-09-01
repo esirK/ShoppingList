@@ -1,8 +1,9 @@
-from flask import Flask, render_template, url_for, request
+from flask import Flask, render_template, url_for, request, flash
 from flask_bootstrap import Bootstrap
 from flask_login import LoginManager, login_user, current_user, logout_user, login_required
 from werkzeug.utils import redirect
 
+from app.forms import SignUpForm
 from app.models.account import Account
 from app.models.user import User
 
@@ -53,18 +54,26 @@ def login():
 @app.route("/signup", methods=['GET', 'POST'])
 def signup():
     global account
+    form = SignUpForm()
+
     if current_user.is_authenticated:
         return redirect(url_for('index'))
     else:
         if request.method == 'POST':
-            if account.check_user(request.form['email']):
-                # User Exist
-                return "User Already Exists"
+            print("Got A User: " + form.username.data)
+            print("Alwasys " + str(form.validate()))
+            if form.validate():
+                print("Got A User: " + str(form.username))
+                if account.check_user(form.email.data):
+                    # User Exist
+                    return "User Already Exists"
+                else:
+                    account.create_user(User(form.username.data, form.email.data, form.password.data))
+                    return redirect("login")
             else:
-                account.create_user(User(request.form['username'], request.form['email'], request.form['psw']))
-                return redirect("login")
+                print("Got Error " + str(form.errors))
 
-    return render_template("signup.html")
+    return render_template("signup.html", form=form)
 
 
 @app.route("/logout")
