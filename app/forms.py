@@ -13,5 +13,5 @@ class SignUpForm(Form):
 
 class LoginForm(Form):
     email = StringField("Email", validators=[DataRequired(), length(min=4)])
-    password = PasswordField('password', validators=[DataRequired, length(min=4, max=80)])
-    remember = BooleanField('remember me')
+    password = PasswordField('Password', validators=[DataRequired(), length(min=4, max=80)])
+    # remember = BooleanField('remember me')

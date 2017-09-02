@@ -3,7 +3,7 @@ from flask_bootstrap import Bootstrap
 from flask_login import LoginManager, login_user, current_user, logout_user, login_required
 from werkzeug.utils import redirect
 
-from app.forms import SignUpForm
+from app.forms import SignUpForm, LoginForm
 from app.models.account import Account
 from app.models.user import User
 
@@ -23,6 +23,7 @@ def load_user(email):
 
 @app.route("/")
 def index():
+    """The root Of The App"""
     if current_user.is_authenticated:
         return render_template("userdashboard.html", name=current_user)
     else:
@@ -31,24 +32,25 @@ def index():
 
 @app.route("/login", methods=['GET', 'POST'])
 def login():
+    form = LoginForm()
+
     if current_user.is_authenticated:
         return redirect(url_for('index'))
     else:
-        if request.method == 'POST':
-            user = account.check_user(request.form['email'])
+        if form.validate_on_submit():
+            user = account.check_user(form.email.data)
             if user:
                 # A User Exist with that Email now check password
-                if request.form['psw'] == user.password:
+                if form.password.data == user.password:
                     login_user(user)
                     return redirect(url_for('index'))
                 else:
                     print("Not OK")
-                    return "Invalid Username Or Password"
-                    # flash("Invalid Username Or Password")
+                    flash("Invalid Username Or Password")
             else:
-                return "User Doesn't Exist"
+                flash("User Does Not Exist")
 
-    return render_template("login.html")
+    return render_template("login.html", form=form)
 
 
 @app.route("/signup", methods=['GET', 'POST'])
@@ -59,19 +61,14 @@ def signup():
     if current_user.is_authenticated:
         return redirect(url_for('index'))
     else:
-        if request.method == 'POST':
-            print("Got A User: " + form.username.data)
-            print("Alwasys " + str(form.validate()))
-            if form.validate():
-                print("Got A User: " + str(form.username))
-                if account.check_user(form.email.data):
-                    # User Exist
-                    return "User Already Exists"
-                else:
-                    account.create_user(User(form.username.data, form.email.data, form.password.data))
-                    return redirect("login")
+        if form.validate_on_submit():
+            if account.check_user(form.email.data):
+                # User Exist
+                flash("User Already Exists")
             else:
-                print("Got Error " + str(form.errors))
+                account.create_user(User(form.username.data, form.email.data, form.password.data))
+                flash("User Created Successfully")
+                return redirect("login")
 
     return render_template("signup.html", form=form)
 

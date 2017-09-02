@@ -1,22 +1,35 @@
 <!DOCTYPE html>
+{% extends "base.html" %}
+
+{% from "_render_field.html" import render_field %}
+
 <html lang="en">
+{% block head %}
+{{ super() }}
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static',filename='main.css') }}">
 </head>
+{% endblock %}
+
+{% block navbar %}
+{% endblock %}
+
 <body>
+{% block page_content %}
 <form class="card" method="post">
     <div class="form-header">
         <h4 class="title">Please Login</h4>
     </div>
     <div class="container">
-        <label><b>Email</b></label>
-        <input type="text" placeholder="Enter Email" name="email" required>
 
-        <label><b>Password</b></label>
-        <input type="password" placeholder="Enter Password" name="psw" required>
+        {{ form.csrf_token }}
+
+        {{ render_field(form.email) }}
+
+        {{ render_field(form.password) }}
 
         <input type="checkbox" checked="checked"> Remember me
 
@@ -25,7 +38,10 @@
             <button type="submit" class="loginbtn">Login</button>
         </div>
     </div>
-<p style="margin: 10px; width: auto; padding: 12px 20px; " align="center" ><a href="{{ url_for('signup') }}">No Account? Sign Up</a></p>
+    <p style="margin: 10px; width: auto; padding: 12px 20px; " align="center" ><a href="{{ url_for('signup') }}">No Account? Sign Up</a></p>
+
 </form>
+{% endblock %}
+
 </body>
 </html>
