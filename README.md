@@ -11,10 +11,13 @@ meeting the needs of keeping track of their shopping lists.
 3. Create a virtual environment for the project and activate it:
 > `virtualenv venv` Then
 > `source env/bin/activate`
-> For Windows Use
+For Windows Use
 > > `\path\to\env\Scripts\activate`
 4. Move to the app directory `cd ShoppingList`
 5. Install the required packages: 
 > `pip install -r requirements.txt`
 ### Launching the App
 run the app with the command: `python run.py runserver`
+Automated Tests Can Be run Simply by typing
+ `nosetests`
+ > To Run A Specific Test us `nosetests /path/to/test.py`
