@@ -1,8 +1,11 @@
 {% extends "bootstrap/base.html" %}
 {% block title %}Shopping List APP{% endblock %}
+{% block head %}
+{{ super() }}
+{% endblock %}
 {% block navbar %}
 <div class="navbar navbar-inverse" role="navigation">
-    <div class="container">
+    <div class="container-fluid">
         <div class="navbar-header">
             <a class="navbar-brand" href="/">ShoppingListApp</a>
         </div>
@@ -15,8 +18,17 @@
     </div>
 </div>
 {% endblock %}
+
 {% block content %}
-<div class="container">
+<div class="container-fluid">
+    <div class="container">
+        {% for message in get_flashed_messages() %}
+        <div class="alert alert-warning">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            {{ message }}
+        </div>
+        {% endfor %}
+    </div>
     {% block page_content %}{% endblock %}
 </div>
 {% endblock %}

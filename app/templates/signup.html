@@ -1,15 +1,25 @@
 <!DOCTYPE html>
+{% extends "base.html" %}
+
 {% from "_render_field.html" import render_field %}
 <html lang="en">
+{% block head %}
+
+{{ super() }}
+
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="{{ url_for('static',filename='main.css') }}">
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100" rel="stylesheet">
     <title>SignUp</title>
 </head>
+{% endblock %}
+
+{% block navbar %}
+{% endblock %}
 
 <body>
-
+{% block page_content %}
 <form class="card" method="post" action="/signup">
     <div class="form-header">
         <h4>Signup To ShoppingList App</h4>
@@ -34,6 +44,6 @@
         </div>
     </div>
 </form>
-
+{% endblock %}
 </body>
 </html>
