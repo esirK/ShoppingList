@@ -1,6 +1,7 @@
 from flask_wtf import Form
 from wtforms import StringField, PasswordField, BooleanField
 from wtforms.validators import DataRequired, length, Email, EqualTo
+from wtforms.widgets import TextArea
 
 
 class SignUpForm(Form):
@@ -15,3 +16,9 @@ class LoginForm(Form):
     email = StringField("Email", validators=[DataRequired(), length(min=4)])
     password = PasswordField('Password', validators=[DataRequired(), length(min=4, max=80)])
     # remember = BooleanField('remember me')
+
+
+class CreateShoppingList(Form):
+    name = StringField("Name", validators=[DataRequired(), length(min=4)])
+    # description = StringField("Description", validators=[DataRequired(), length(min=4)])
+    body = StringField("Description", widget=TextArea())

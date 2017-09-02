@@ -3,7 +3,7 @@ from flask_bootstrap import Bootstrap
 from flask_login import LoginManager, login_user, current_user, logout_user, login_required
 from werkzeug.utils import redirect
 
-from app.forms import SignUpForm, LoginForm
+from app.forms import SignUpForm, LoginForm, CreateShoppingList
 from app.models.account import Account
 from app.models.user import User
 
@@ -80,10 +80,21 @@ def logout():
     return redirect(url_for("index"))
 
 
-@app.route("/create_shoppinglist")
-@login_required
+@app.route("/create_shoppinglist", methods=['GET', 'POST'])
 def create_shopping_lst():
-    return render_template("create_shoppinglist.html")
+    form = CreateShoppingList()
+    if current_user.is_authenticated:
+        if form.validate_on_submit():
+            if current_user.account.check_user(form.email.data):
+                # User Exist
+                flash("User Already Exists")
+            else:
+                account.create_user(User(form.username.data, form.email.data, form.password.data))
+                flash("User Created Successfully")
+                return redirect("login")
+
+        return render_template("create_shoppinglist.html", form=form)
+    return redirect(url_for('index'))
 
 
 @app.route("/invalid")
