@@ -2,9 +2,10 @@ from app.Exceptions import ItemDoesNotExist, ItemAlreadyExist
 
 
 class ShoppingList:
-    def __init__(self, name):
+    def __init__(self, name, description):
         """ This Class Adds and Manages Items In a User Shopping List"""
         self.name = name
+        self.description = description
         self.items = {}
         self.categories = {}
 

@@ -1,9 +1,11 @@
-from flask import Flask, render_template, url_for, request, flash
+from flask import Flask, render_template, url_for, flash
 from flask_bootstrap import Bootstrap
-from flask_login import LoginManager, login_user, current_user, logout_user, login_required
+from flask_login import LoginManager, login_user, current_user, logout_user
 from werkzeug.utils import redirect
 
+from app.Exceptions import ShoppingListAlreadyExist
 from app.forms import SignUpForm, LoginForm, CreateShoppingList
+from app.models.ShoppingList import ShoppingList
 from app.models.account import Account
 from app.models.user import User
 
@@ -85,14 +87,19 @@ def create_shopping_lst():
     form = CreateShoppingList()
     if current_user.is_authenticated:
         if form.validate_on_submit():
-            if current_user.account.check_user(form.email.data):
-                # User Exist
-                flash("User Already Exists")
-            else:
-                account.create_user(User(form.username.data, form.email.data, form.password.data))
-                flash("User Created Successfully")
-                return redirect("login")
+            # User Exist
+            shopping_list = ShoppingList(form.name.data, form.body.data)
 
+            try:
+                current_user.create_shopping_lst(shopping_list)
+            except ShoppingListAlreadyExist:
+                flash("Shopping List " + form.name.data + " Already Exists")
+                return render_template("create_shoppinglist.html", form=form)
+
+            flash("Created Shopping List " + form.name.data + " You Now Have "
+                  + str(len(current_user.shopping_lists)))
+
+            return redirect(url_for('index'))
         return render_template("create_shoppinglist.html", form=form)
     return redirect(url_for('index'))
 

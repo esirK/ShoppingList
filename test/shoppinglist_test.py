@@ -7,7 +7,7 @@ from app.models.item import Item
 
 class TestShoppingList(unittest.TestCase):
     def setUp(self):
-        self.nakkumart = ShoppingList("Nakkumart")
+        self.nakkumart = ShoppingList("Nakkumart", " The Supermarket Is Close")
         self.item = Item("Call Of Duty", "Game", 3000, 1)
 
     def test_add_item(self):
