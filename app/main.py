@@ -45,7 +45,6 @@ def login():
                     login_user(user)
                     return redirect(url_for('index'))
                 else:
-                    print("Not OK")
                     flash("Invalid Username Or Password")
             else:
                 flash("User Does Not Exist")
@@ -75,7 +74,9 @@ def signup():
 
 @app.route("/logout")
 def logout():
+    """Logs Out A Currently LoggedIn User"""
     logout_user()
+    flash("Logged Out Successfully")
     return redirect(url_for("index"))
 
 
