@@ -58,8 +58,9 @@ button a {
 }
 
 h2 {
-    text-align: center;
-    {font-family: "Karma", sans-serif}
+    text-align: end;
+    {
+    font-family: "Karma", sans-serif;}
 }
 
 /* Extra styles for the cancel button */
@@ -118,8 +119,8 @@ h2 {
     width: auto;
     margin-bottom: 0px;
     background: #7dc855;
-    margin: 8px 10px;
-    float:right;
+    margin: 10px 130px;
+    float: right;
 }
 
 /* Change styles for cancel button and signup button on extra small screens */
@@ -127,4 +128,7 @@ h2 {
     .cancelbtn, .signupbtn {
         width: 100%;
     }
+}
+div + button {
+float: right;
 }
