@@ -20,13 +20,17 @@
         <button type="submit" class="new-btn"><a href="{{ url_for('create_shopping_lst') }}"  >Create A ShoppingList</a></button>
         <div class="form-header">
             <h2 class="title">Awesome ShoppingList App</h2>
-            <p style="color: #2196F3">Welcome {{ name.name }}</p>
+            <p style="color: #2196F3">Loggedin As {{ name.name }} Having
+                {{ current_user.get_num_of_shopping_lists() }} Shopping Lists</p>
         </div>
+
+        {% for shopping_list in current_user.shopping_lists %}
 
         <div class="card">
             <form action="view_shoppinglist.html">
                 <div class="form-header">
-                    <h4 class="title">Nakkumart Supermarket</h4>
+                    <h4 class="title"> {{ current_user.get_shopping_lst(shopping_list).name }} </h4>
+
                 </div>
                 <div class="form-body">
                     <ol>
@@ -54,68 +58,7 @@
                 </div>
             </form>
         </div>
-        <div class="card">
-            <form action="view_shoppinglist.html">
-                <div class="form-header">
-                    <h4 class="title">CleanShelf Supermarket</h4>
-                </div>
-                <div class="form-body">
-                    <ol>
-                        <ol><strong>Grocery.</strong>
-                            <li>Bananas</li>
-                            <li>Mangoes</li>
-                            <li>Apples</li>
-                        </ol>
-
-                        <ol><strong>Electronics.</strong>
-                            <li>Radio</li>
-                            <li>Power Adapters</li>
-                            <li>TV cord</li>
-                        </ol>
-                        <ol><strong>General</strong>
-                            <li>Basketball</li>
-                            <li>Swimming Kits</li>
-                            <li>The 48 Laws of Power Book</li>
-                        </ol>
-                    </ol>
-                    <!-- Buttons -->
-                    <button type="submit" class="view-btn"><a href="#">View</a></button>
-                    <button type="submit" class="deletebtn"><a href="#">Delete</a></button>
-                    <button type="submit" class="updatebtn"><a href="#">Update</a></button>
-                </div>
-            </form>
-        </div>
-        <div class="card">
-            <form action="view_shoppinglist.html">
-                <div class="form-header">
-                    <h4 class="title">Tuskys Supermarket</h4>
-                </div>
-                <div class="form-body">
-                    <ol>
-                        <ol><strong>Furniture.</strong>
-                            <li>Sofa Set</li>
-                            <li>Bed</li>
-                            <li>Baby Cot</li>
-                        </ol>
-
-                        <ol><strong>Hardware.</strong>
-                            <li>Wheelbarrow</li>
-                            <li>Bike</li>
-                            <li>Shovel</li>
-                        </ol>
-                        <ol><strong>General</strong>
-                            <li>Basketball</li>
-                            <li>Swimming Kits</li>
-                            <li>The 48 Laws of Power Book</li>
-                        </ol>
-                    </ol>
-                    <!-- Buttons -->
-                    <button type="submit" class="view-btn"><a href="#">View</a></button>
-                    <button type="submit" class="deletebtn"><a href="#">Delete</a></button>
-                    <button type="submit" class="updatebtn"><a href="#">Update</a></button>
-                </div>
-            </form>
-        </div>
+        {% endfor %}
     </div>
 </form>
 {% endblock %}
