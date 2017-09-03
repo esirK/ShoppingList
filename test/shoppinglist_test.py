@@ -9,42 +9,68 @@ class TestShoppingList(unittest.TestCase):
     def setUp(self):
         self.nakkumart = ShoppingList("Nakkumart", " The Supermarket Is Close")
         self.item = Item("Call Of Duty", "Game", 3000, 1)
+        self.item1 = Item("WabbDabDah", "Game", 3000, 1)
 
     def test_add_item(self):
         item = Item("Bananas", "Grocery", 10, 5)
-        self.assertEqual(0, len(self.nakkumart.items))
+        # No Categories where a user can keep his or her items by default
+
+        self.assertEqual(0, len(self.nakkumart.categories))
         self.nakkumart.add_item(item)
-        self.assertEqual(1, len(self.nakkumart.items))
+        # on Add item a Category called Grocery is created where the bananas
+        #  are stored into
+
+        mangoes = Item("Mangoes", "Grocery", 5, 1)
+        # len of categories should remain 1
+        self.nakkumart.add_item(mangoes)
+        self.assertEqual(1, len(self.nakkumart.categories))
+
+        # len of the Grocery category should now be 2
+        self.assertEqual(2, len(self.nakkumart.categories[mangoes.category]))
 
     def test_remove_item(self):
         item = Item("The Flash", "Book", 1000, 1)
         item2 = Item("Call Of Duty", "Game", 3000, 1)
         self.nakkumart.add_item(item)
         self.nakkumart.add_item(item2)
-        self.assertEqual(2, len(self.nakkumart.items))
-        self.nakkumart.remove_item(item2.name)
-        self.assertEqual(1, len(self.nakkumart.items))
+
+        # Cat for Book and Cat For Game
+        self.assertEqual(2, len(self.nakkumart.categories))
+        self.nakkumart.remove_item(item)
+        # Will remove the book "The Flash" and Books category also"
+        self.assertEqual(1, len(self.nakkumart.categories))
+
+    def test_category_removed_if_its_empty(self):
+        item = Item("The Flash", "Book", 1000, 1)
+        self.nakkumart.add_item(item)
+        self.assertEqual(1, len(self.nakkumart.categories))
+        self.nakkumart.remove_item(item)
+        # Check if "Book" category is removed if it has no items
+        self.assertEqual(0, len(self.nakkumart.categories))
 
     def test_exception_raised_if_non_existing_item_is_removed(self):
-        item = Item("The Flash", "Book", 1000, 1)  # Item not yet added to shopping list
+        item = Item("The Flash", "Book", 1000, 1)
+        # Item not yet added to shopping list
         with self.assertRaises(ItemDoesNotExist):
-            self.nakkumart.remove_item(item.name)
+            self.nakkumart.remove_item(item)
+        self.assertEqual(0, len(self.nakkumart.categories))
 
     def test_update_item(self):
         item = Item("Call Of Duty", "Game", 3000, 1)
         self.nakkumart.add_item(item)
-        self.assertEqual(item.price, self.nakkumart.get_item(item.name).price)
+        self.assertEqual(item.price, self.nakkumart.get_item(item).price)
         updated_item = Item("Call Of Duty", "Game", 3500, 1)
-        self.nakkumart.update_item(item.name, updated_item)
-        self.assertEqual(updated_item.price, self.nakkumart.get_item(item.name).price)
+        self.nakkumart.update_item(updated_item)
+        self.assertEqual(updated_item.price, self.nakkumart.get_item(item).price)
 
     def test_updating_an_item_not_in_shopping_list_raises_exception(self):
         with self.assertRaises(ItemDoesNotExist):
-            self.nakkumart.update_item("War Zone", self.item)
+            self.nakkumart.update_item(self.item1)
 
     def test_adding_existing_item_raises_exception(self):
         self.nakkumart.add_item(self.item)
-        new_item = Item("Call Of Duty", "Movie", 4000, 3)  # Item With same name as Item
+        new_item = Item("Call Of Duty", "Movie", 4000, 3)
+        self.nakkumart.add_item(new_item)
         with self.assertRaises(ItemAlreadyExist):
             self.nakkumart.add_item(new_item)
 
