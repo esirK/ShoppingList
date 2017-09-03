@@ -1,6 +1,10 @@
 class Item:
-    def __init__(self, name, category, price, quantity):
+    def __init__(self, name, price, quantity, category=None):
         self.name = name
-        self. category = category
-        self. price = price
+        self.price = price
         self.quantity = quantity
+
+        if category is None:
+            self.category = "General"
+        else:
+            self.category = category

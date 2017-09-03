@@ -8,11 +8,11 @@ from app.models.item import Item
 class TestShoppingList(unittest.TestCase):
     def setUp(self):
         self.nakkumart = ShoppingList("Nakkumart", " The Supermarket Is Close")
-        self.item = Item("Call Of Duty", "Game", 3000, 1)
-        self.item1 = Item("WabbDabDah", "Game", 3000, 1)
+        self.item = Item("Call Of Duty", 3000, 1, "Game")
+        self.item1 = Item("WabbDabDah", 3000, 1, "Game")
 
     def test_add_item(self):
-        item = Item("Bananas", "Grocery", 10, 5)
+        item = Item("Bananas", 10, 5, "Grocery")
         # No Categories where a user can keep his or her items by default
 
         self.assertEqual(0, len(self.nakkumart.categories))
@@ -20,7 +20,7 @@ class TestShoppingList(unittest.TestCase):
         # on Add item a Category called Grocery is created where the bananas
         #  are stored into
 
-        mangoes = Item("Mangoes", "Grocery", 5, 1)
+        mangoes = Item("Mangoes", 5, 1, "Grocery")
         # len of categories should remain 1
         self.nakkumart.add_item(mangoes)
         self.assertEqual(1, len(self.nakkumart.categories))
@@ -29,8 +29,8 @@ class TestShoppingList(unittest.TestCase):
         self.assertEqual(2, len(self.nakkumart.categories[mangoes.category]))
 
     def test_remove_item(self):
-        item = Item("The Flash", "Book", 1000, 1)
-        item2 = Item("Call Of Duty", "Game", 3000, 1)
+        item = Item("The Flash", 1000, 1, "Book")
+        item2 = Item("Call Of Duty", 3000, 1, "Game")
         self.nakkumart.add_item(item)
         self.nakkumart.add_item(item2)
 
@@ -41,7 +41,7 @@ class TestShoppingList(unittest.TestCase):
         self.assertEqual(1, len(self.nakkumart.categories))
 
     def test_category_removed_if_its_empty(self):
-        item = Item("The Flash", "Book", 1000, 1)
+        item = Item("The Flash", 1000, 1, "Book")
         self.nakkumart.add_item(item)
         self.assertEqual(1, len(self.nakkumart.categories))
         self.nakkumart.remove_item(item)
@@ -49,17 +49,17 @@ class TestShoppingList(unittest.TestCase):
         self.assertEqual(0, len(self.nakkumart.categories))
 
     def test_exception_raised_if_non_existing_item_is_removed(self):
-        item = Item("The Flash", "Book", 1000, 1)
+        item = Item("The Flash", 1000, 1, "Book")
         # Item not yet added to shopping list
         with self.assertRaises(ItemDoesNotExist):
             self.nakkumart.remove_item(item)
         self.assertEqual(0, len(self.nakkumart.categories))
 
     def test_update_item(self):
-        item = Item("Call Of Duty", "Game", 3000, 1)
+        item = Item("Call Of Duty", 3000, 1, "Game")
         self.nakkumart.add_item(item)
         self.assertEqual(item.price, self.nakkumart.get_item(item).price)
-        updated_item = Item("Call Of Duty", "Game", 3500, 1)
+        updated_item = Item("Call Of Duty", 3500, 1, "Game")
         self.nakkumart.update_item(updated_item)
         self.assertEqual(updated_item.price, self.nakkumart.get_item(item).price)
 
@@ -69,10 +69,21 @@ class TestShoppingList(unittest.TestCase):
 
     def test_adding_existing_item_raises_exception(self):
         self.nakkumart.add_item(self.item)
-        new_item = Item("Call Of Duty", "Movie", 4000, 3)
+        new_item = Item("Call Of Duty", 4000, 3, "Movie")
         self.nakkumart.add_item(new_item)
         with self.assertRaises(ItemAlreadyExist):
             self.nakkumart.add_item(new_item)
+
+    def test_if_no_item_category_provided_general_category_is_used(self):
+        """This Method Test if the user doesn't have the ability to categorize
+        an item then the item is added to a default (general) category
+        """
+        general_item = Item("Mysterious Item", 5300, 1)
+        # Before adding the Item No Category so len == 0
+        self.assertTrue("General", general_item.category)
+        self.assertEqual(0, len(self.nakkumart.categories))
+        self.nakkumart.add_item(general_item)
+        self.assertEqual(1, len(self.nakkumart.categories))
 
 
 if __name__ == '__main__':
