@@ -33,3 +33,6 @@ class User(UserMixin):
         except KeyError:
             raise ShoppingListDoesNotExist
         return self.shopping_lists[shopping_lst_name]
+
+    def get_num_of_shopping_lists(self):
+        return len(self.shopping_lists)
