@@ -23,7 +23,7 @@ def load_user(email):
     return account.check_user(email)
 
 
-@app.route("/")
+@app.route("/", methods=['GET', 'POST'])
 def index():
     """The root Of The App"""
     if current_user.is_authenticated:
@@ -87,7 +87,6 @@ def create_shopping_lst():
     form = CreateShoppingList()
     if current_user.is_authenticated:
         if form.validate_on_submit():
-            # User Exist
             shopping_list = ShoppingList(form.name.data, form.body.data)
 
             try:
@@ -100,8 +99,10 @@ def create_shopping_lst():
                   + str(len(current_user.shopping_lists)))
 
             return redirect(url_for('index'))
+
         return render_template("create_shoppinglist.html", form=form)
-    return redirect(url_for('index'))
+    else:
+        return redirect(url_for('index'))
 
 
 @app.route("/invalid")
