@@ -34,5 +34,9 @@ class User(UserMixin):
             raise ShoppingListDoesNotExist
         return self.shopping_lists[shopping_lst_name]
 
+    def update_shopping_list(self, shopping_list):
+        self.delete_shopping_list(shopping_list.name)
+        self.create_shopping_lst(shopping_list)
+
     def get_num_of_shopping_lists(self):
         return len(self.shopping_lists)
