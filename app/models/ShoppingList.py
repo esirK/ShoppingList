@@ -37,3 +37,6 @@ class ShoppingList:
     def get_item(self, item):
         """Returns an item object """
         return self.categories[item.category][item.name]
+
+    def get_categories(self):
+        return len(self.categories)

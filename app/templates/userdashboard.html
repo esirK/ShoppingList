@@ -3,12 +3,6 @@
 
 {% block head %}
 {{ super() }}
-<head>
-    <meta charset="UTF-8">
-    <title>Dashboard</title>
-    <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100" rel="stylesheet">
-    <link rel="stylesheet" href="{{ url_for('static',filename='main.css') }}">
-</head>
 {% endblock %}
 
 <body>
@@ -20,55 +14,59 @@
         </button>
         <div class="form-header">
             <h2 class="title">Awesome ShoppingList App</h2>
-            <p style="color: #2196F3">Loggedin As {{ name.name }} Having
-                {{ current_user.get_num_of_shopping_lists() }} Shopping Lists</p>
+            <p style="color: #2196F3">Loggedin As {{ current_user.name }} </p>
         </div>
 
-        {% for shopping_list in current_user.shopping_lists %}
-
         <div class="card">
+        {% if current_user.get_num_of_shopping_lists() > 0 %}
+        {% for key, shopping_list in current_user.shopping_lists.items() %}
+
             <form method="post">
                 <div class="form-header">
-                    <h4 class="title"> {{ current_user.get_shopping_lst(shopping_list).name }} </h4>
+                    <h4 class="title"> {{ key }} </h4>
                 </div>
                 <div class="form-body">
                     <ol>
-                        <ol><strong>Grocery.</strong>
-                            <li>Bananas</li>
-                            <li>Mangoes</li>
-                            <li>Apples</li>
-                        </ol>
+                        {% if shopping_list.get_categories() > 0 %}
+                            {% for key, cat in shopping_list.categories.items() %}
+                        <ul>
 
-                        <ol><strong>Electronics.</strong>
-                            <li>Radio</li>
-                            <li>Power Adapters</li>
-                            <li>TV cord</li>
-                        </ol>
-                        <ol><strong>General</strong>
-                            <li>Basketball</li>
-                            <li>Swimming Kits</li>
-                            <li>The 48 Laws of Power Book</li>
-                        </ol>
+                            <strong>{{ key }}</strong>
+                            {% for item_name, item in cat.items() %}
+                                <li>{{ item.quantity }} {{ item.name }}(s) Costing Sh {{ item.price }} Each</li>
+                            {% endfor %}
+
+                        </ul>
+                        {% endfor %}
+                        {% else %}
+                            <ul>You Currently Have no items In your shopping list</ul>
+                        {% endif %}
                     </ol>
+
                     <!-- Buttons -->
                     <button type="submit" class="view-btn">
 
                         <a href="{{ url_for('add_item',
-                        shopping_list_name=current_user.get_shopping_lst(shopping_list).name) }}">Add Item</a>
+                        shopping_list_name=current_user.get_shopping_lst(key).name) }}">Update</a>
 
                     </button>
                     <button type="submit" class="deletebtn">
-                        <a href="#">Delete</a>
+                        <a href="{{ url_for('delete_shopping_list',
+                        shopping_list_name=current_user.get_shopping_lst(key).name) }}">Delete</a>
                     </button>
                     <button type="submit" class="updatebtn">
-                        <a href="#">Update</a>
+                        <a href="{{ url_for('add_item',
+                        shopping_list_name=current_user.get_shopping_lst(key).name) }}">Add Item</a>
                     </button>
                     <!-- End Buttons -->
                 </div>
             </form>
-        </div>
         {% endfor %}
+        {% else %}
+            <ul>You Currently Do not have any Shopping List</ul>
+        {% endif%}
     </div>
+        </div>
 </form>
 {% endblock %}
 </body>
