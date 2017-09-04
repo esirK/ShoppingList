@@ -2,19 +2,13 @@
 {% extends "base.html" %}
 
 {% from "_render_field.html" import render_field %}
-<html lang="en">
+
+<!-- Import Head Content -->
 {% block head %}
-
 {{ super() }}
-
-<head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="{{ url_for('static',filename='main.css') }}">
-    <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100" rel="stylesheet">
-    <title>SignUp</title>
-</head>
 {% endblock %}
 
+<!-- Override navbar to prevent them from appearling in this page -->
 {% block navbar %}
 {% endblock %}
 

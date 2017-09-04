@@ -1,8 +1,15 @@
 {% extends "bootstrap/base.html" %}
-{% block title %}Shopping List APP{% endblock %}
 {% block head %}
 {{ super() }}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% block title %}{% endblock %}
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static',filename='main.css') }}">
+</head>
 {% endblock %}
+
 {% block navbar %}
 <div class="navbar navbar-inverse" role="navigation">
     <div class="container-fluid">
@@ -31,6 +38,8 @@
         </div>
         {% endfor %}
     </div>
+
     {% block page_content %}{% endblock %}
+
 </div>
 {% endblock %}
