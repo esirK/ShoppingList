@@ -22,3 +22,11 @@ class CreateShoppingList(Form):
     name = StringField("Name", validators=[DataRequired(), length(min=4)])
     # description = StringField("Description", validators=[DataRequired(), length(min=4)])
     body = StringField("Description", widget=TextArea())
+
+
+class AddItem(Form):
+    item_name = StringField("Item Name", validators=[DataRequired(), length(min=4)])
+    category = StringField("Category('General' by Default)", validators=[length(min=1)])
+    item_price = StringField("Item Price", validators=[DataRequired(), length(min=1)])
+    item_quantity = StringField("Item Quantity", validators=[DataRequired(), length(min=1)])
+

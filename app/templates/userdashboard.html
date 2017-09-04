@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 {% extends "base.html" %}
-<html lang="en">
 
 {% block head %}
 {{ super() }}
@@ -17,7 +16,8 @@
 
 <form method="post">
     <div class="items-container">
-        <button type="submit" class="new-btn"><a href="{{ url_for('create_shopping_lst') }}"  >Create A ShoppingList</a></button>
+        <button type="submit" class="new-btn"><a href="{{ url_for('create_shopping_lst') }}">Create A ShoppingList</a>
+        </button>
         <div class="form-header">
             <h2 class="title">Awesome ShoppingList App</h2>
             <p style="color: #2196F3">Loggedin As {{ name.name }} Having
@@ -27,10 +27,9 @@
         {% for shopping_list in current_user.shopping_lists %}
 
         <div class="card">
-            <form action="view_shoppinglist.html">
+            <form method="post">
                 <div class="form-header">
                     <h4 class="title"> {{ current_user.get_shopping_lst(shopping_list).name }} </h4>
-
                 </div>
                 <div class="form-body">
                     <ol>
@@ -52,9 +51,19 @@
                         </ol>
                     </ol>
                     <!-- Buttons -->
-                    <button type="submit" class="view-btn"><a href="#">View</a></button>
-                    <button type="submit" class="deletebtn"><a href="#">Delete</a></button>
-                    <button type="submit" class="updatebtn"><a href="#">Update</a></button>
+                    <button type="submit" class="view-btn">
+
+                        <a href="{{ url_for('add_item',
+                        shopping_list_name=current_user.get_shopping_lst(shopping_list).name) }}">Add Item</a>
+
+                    </button>
+                    <button type="submit" class="deletebtn">
+                        <a href="#">Delete</a>
+                    </button>
+                    <button type="submit" class="updatebtn">
+                        <a href="#">Update</a>
+                    </button>
+                    <!-- End Buttons -->
                 </div>
             </form>
         </div>

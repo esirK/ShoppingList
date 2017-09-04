@@ -3,10 +3,11 @@ from flask_bootstrap import Bootstrap
 from flask_login import LoginManager, login_user, current_user, logout_user
 from werkzeug.utils import redirect
 
-from app.Exceptions import ShoppingListAlreadyExist
-from app.forms import SignUpForm, LoginForm, CreateShoppingList
+from app.Exceptions import ShoppingListAlreadyExist, ShoppingListDoesNotExist, ItemAlreadyExist
+from app.forms import SignUpForm, LoginForm, CreateShoppingList, AddItem
 from app.models.ShoppingList import ShoppingList
 from app.models.account import Account
+from app.models.item import Item
 from app.models.user import User
 
 app = Flask(__name__)
@@ -29,7 +30,7 @@ def index():
     if current_user.is_authenticated:
         return render_template("userdashboard.html", name=current_user)
     else:
-        return redirect("login")
+        return redirect(url_for("login"))
 
 
 @app.route("/login", methods=['GET', 'POST'])
@@ -79,7 +80,7 @@ def logout():
     """Logs Out A Currently LoggedIn User"""
     logout_user()
     flash("Logged Out Successfully")
-    return redirect(url_for("index"))
+    return redirect(url_for("login"))
 
 
 @app.route("/create_shoppinglist", methods=['GET', 'POST'])
@@ -103,6 +104,29 @@ def create_shopping_lst():
         return render_template("create_shoppinglist.html", form=form)
     else:
         return redirect(url_for('index'))
+
+
+@app.route("/add_item/<shopping_list_name>", methods=['GET', 'POST'])
+def add_item(shopping_list_name):
+    form = AddItem()
+    if current_user.is_authenticated:
+        if form.validate_on_submit():
+            item = Item(form.item_name.data, form.item_price.data, form.item_quantity.data, form.category.data)
+            try:
+                shopping_list = current_user.get_shopping_lst(shopping_list_name)
+                shopping_list.add_item(item)
+                current_user.update_shopping_list(shopping_list)
+                flash(" " + item.name + " Successfully Added into " + "Shopping List "
+                      + shopping_list_name)
+                return redirect(url_for('index'))
+
+            except ItemAlreadyExist:
+                flash(item.name + " Already Exists Try updating it instead")
+                return redirect(url_for('index'))
+        else:
+            return render_template("add_item.html", form=form, shopping_list_name=shopping_list_name)
+    else:
+        return redirect(url_for('login'))
 
 
 @app.route("/invalid")
