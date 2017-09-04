@@ -44,6 +44,7 @@ class TestUser(unittest.TestCase):
         self.assertEqual(1, len(self.user.shopping_lists))
         self.assertIsInstance(self.user.get_shopping_lst("Nakkumart"), ShoppingList)
         self.assertEqual("Nakkumart", self.user.get_shopping_lst("Nakkumart").name)
+        self.assertEqual(1, len(self.user.shopping_lists))
 
     def test_get_shoppinglist_raises_exception_if_shoppinglist_not_found(self):
         with self.assertRaises(ShoppingListDoesNotExist):

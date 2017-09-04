@@ -3,7 +3,7 @@ from flask_bootstrap import Bootstrap
 from flask_login import LoginManager, login_user, current_user, logout_user
 from werkzeug.utils import redirect
 
-from app.Exceptions import ShoppingListAlreadyExist, ShoppingListDoesNotExist, ItemAlreadyExist
+from app.Exceptions import ShoppingListAlreadyExist, ItemAlreadyExist, ShoppingListDoesNotExist
 from app.forms import SignUpForm, LoginForm, CreateShoppingList, AddItem
 from app.models.ShoppingList import ShoppingList
 from app.models.account import Account
@@ -28,7 +28,7 @@ def load_user(email):
 def index():
     """The root Of The App"""
     if current_user.is_authenticated:
-        return render_template("userdashboard.html", name=current_user)
+        return render_template("userdashboard.html")
     else:
         return redirect(url_for("login"))
 
@@ -118,6 +118,7 @@ def add_item(shopping_list_name):
                 current_user.update_shopping_list(shopping_list)
                 flash(" " + item.name + " Successfully Added into " + "Shopping List "
                       + shopping_list_name)
+                print(shopping_list.categories)
                 return redirect(url_for('index'))
 
             except ItemAlreadyExist:
@@ -125,6 +126,19 @@ def add_item(shopping_list_name):
                 return redirect(url_for('index'))
         else:
             return render_template("add_item.html", form=form, shopping_list_name=shopping_list_name)
+    else:
+        return redirect(url_for('login'))
+
+
+@app.route("/delete_shopping_list/<shopping_list_name>", methods=['GET', 'POST'])
+def delete_shopping_list(shopping_list_name):
+    if current_user.is_authenticated:
+        try:
+            current_user.delete_shopping_list(shopping_list_name)
+            flash(shopping_list_name + " Deleted Successfully ")
+        except ShoppingListDoesNotExist:
+            flash(shopping_list_name + " Does not Exist ")
+        return redirect(url_for('index'))
     else:
         return redirect(url_for('login'))
 
