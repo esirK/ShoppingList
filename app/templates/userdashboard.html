@@ -3,6 +3,7 @@
 
 {% block head %}
 {{ super() }}
+
 {% endblock %}
 
 <body>
@@ -18,28 +19,38 @@
         </div>
 
         <div class="card">
-        {% if current_user.get_num_of_shopping_lists() > 0 %}
-        {% for key, shopping_list in current_user.shopping_lists.items() %}
+            {% if current_user.get_num_of_shopping_lists() > 0 %}
+            {% for shoppinglist_name, shopping_list in current_user.shopping_lists.items() %}
 
             <form method="post">
                 <div class="form-header">
-                    <h4 class="title"> {{ key }} </h4>
+                    <h4 class="title"> {{ shoppinglist_name }} </h4>
                 </div>
                 <div class="form-body">
                     <ol>
                         {% if shopping_list.get_categories() > 0 %}
-                            {% for key, cat in shopping_list.categories.items() %}
+                        {% for key, cat in shopping_list.categories.items() %}
                         <ul>
 
                             <strong>{{ key }}</strong>
                             {% for item_name, item in cat.items() %}
-                                <li>{{ item.quantity }} {{ item.name }}(s) Costing Sh {{ item.price }} Each</li>
+                            <li>{{ item.quantity }} {{ item.name }}(s)
+                                Costing Sh {{ item.price }} Each
+                                <button style="height:20px;width:50px;margin-bottom:10px" type="button"
+                                        class="btn btn-info btn-xs"><a href="{{ url_for('update_item',shopping_list_name=shoppinglist_name,
+                                         name=item.name, price=item.price, quantity=item.quantity, category=key) }}">
+                                    Update</a>
+                                </button>
+                                <button style="height:20px;width:50px;margin-bottom:10px" type="button"
+                                        class="btn btn-danger btn-xs">Delete
+                                </button>
+                            </li>
                             {% endfor %}
 
                         </ul>
                         {% endfor %}
                         {% else %}
-                            <ul>You Currently Have no items In your shopping list</ul>
+                        <ul>You Currently Have no items In your shopping list</ul>
                         {% endif %}
                     </ol>
 
@@ -47,26 +58,26 @@
                     <button type="submit" class="view-btn">
 
                         <a href="{{ url_for('add_item',
-                        shopping_list_name=current_user.get_shopping_lst(key).name) }}">Update</a>
+                        shopping_list_name=current_user.get_shopping_lst(shoppinglist_name).name) }}">Update</a>
 
                     </button>
                     <button type="submit" class="deletebtn">
                         <a href="{{ url_for('delete_shopping_list',
-                        shopping_list_name=current_user.get_shopping_lst(key).name) }}">Delete</a>
+                        shopping_list_name=current_user.get_shopping_lst(shoppinglist_name).name) }}">Delete</a>
                     </button>
                     <button type="submit" class="updatebtn">
                         <a href="{{ url_for('add_item',
-                        shopping_list_name=current_user.get_shopping_lst(key).name) }}">Add Item</a>
+                        shopping_list_name=current_user.get_shopping_lst(shoppinglist_name).name) }}">Add Item</a>
                     </button>
                     <!-- End Buttons -->
                 </div>
             </form>
-        {% endfor %}
-        {% else %}
+            {% endfor %}
+            {% else %}
             <ul>You Currently Do not have any Shopping List</ul>
-        {% endif%}
-    </div>
+            {% endif%}
         </div>
+    </div>
 </form>
 {% endblock %}
 </body>

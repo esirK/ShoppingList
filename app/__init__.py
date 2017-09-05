@@ -1,4 +1,4 @@
-from .main import app
+from .views import app
 
 
 def create_app():

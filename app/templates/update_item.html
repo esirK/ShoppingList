@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+
+{% from "_render_field.html" import render_field %}
+
+{% block head %}
+{{ super() }}
+{% endblock %}
+
+{% block navbar %}
+{% endblock %}
+
+<body>
+{% block page_content %}
+<form class="card" method="post">
+    <div class="form-header">
+        <h4 class="title">Update Item In {{ current_user.get_shopping_lst(shopping_list_name).name }}</h4>
+    </div>
+    <div class="container">
+
+        {{ form.csrf_token }}
+
+        {{ form.item_name.label }}
+        {{ form.item_name(value=item.name) }}
+
+        {{ form.item_price.label }}
+        {{ form.item_price(value=item.price) }}
+
+
+        {{ form.item_quantity.label }}
+        {{ form.item_quantity(value=item.quantity) }}
+
+        {{ form.category.label }}
+        {{ form.category(value=item.category) }}
+
+        <div class="btm_buttons">
+            <button type="button"  class="cancelbtn" onclick="history.back()" >Cancel</button>
+
+            <button type="submit" class="loginbtn">Update</button>
+        </div>
+    </div>
+
+</form>
+{% endblock %}
+
+</body>
+</html>
