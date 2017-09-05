@@ -3,7 +3,7 @@ from flask_bootstrap import Bootstrap
 from flask_login import LoginManager, login_user, current_user, logout_user
 from werkzeug.utils import redirect
 
-from app.Exceptions import ShoppingListAlreadyExist, ItemAlreadyExist, ShoppingListDoesNotExist
+from app.Exceptions import ShoppingListAlreadyExist, ItemAlreadyExist, ShoppingListDoesNotExist, ItemDoesNotExist
 from app.forms import SignUpForm, LoginForm, CreateShoppingList, AddItem
 from app.models.ShoppingList import ShoppingList
 from app.models.account import Account
@@ -97,7 +97,7 @@ def create_shopping_lst():
                 return render_template("create_shoppinglist.html", form=form)
 
             flash("Created Shopping List " + form.name.data + " You Now Have "
-                  + str(len(current_user.shopping_lists)))
+                  + str(len(current_user.shopping_lists)) + " Shopping Lists")
 
             return redirect(url_for('index'))
 
@@ -128,6 +128,30 @@ def add_item(shopping_list_name):
             return render_template("add_item.html", form=form, shopping_list_name=shopping_list_name)
     else:
         return redirect(url_for('login'))
+
+
+@app.route("/update_item/<shopping_list_name>/<name>/<price>/<quantity>/<category>", methods=['GET', 'POST'])
+def update_item(shopping_list_name, name, price, quantity, category):
+    form = AddItem()
+    item_to_update = Item(name=name, price=price, category=category, quantity=quantity)
+
+    if current_user.is_authenticated:
+        item = Item(name=form.item_name.data, price=form.item_price.data, quantity=form.item_quantity.data,
+                    category=form.category.data)
+        if form.validate_on_submit():
+            try:
+                shopping_list = current_user.get_shopping_lst(shopping_list_name)
+                print(shopping_list.get_item(item) == item)
+                shopping_list.update_item(item)
+                flash(item.name + "Has been Successfully Updated")
+            except ItemDoesNotExist:
+                flash(item.name + "Does not Exist Try Adding it instead")
+            return redirect(url_for('index'))
+        else:
+            return render_template("update_item.html", form=form, shopping_list_name=shopping_list_name,
+                                   item=item_to_update)
+    else:
+        return redirect('login')
 
 
 @app.route("/delete_shopping_list/<shopping_list_name>", methods=['GET', 'POST'])
