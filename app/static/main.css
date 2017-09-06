@@ -139,3 +139,7 @@ float: right;
     transform: translatex(-50%);
   }
 }
+input[readonly] {
+    background: #ccc;
+    cursor: not-allowed;
+}
