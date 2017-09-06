@@ -1,13 +1,13 @@
 from app.Exceptions import UserAlreadyExist, UserDoesNotExist
 
 
-class Account(object):
+class Accounts(object):
     """ Creates an Account where users can be stored"""
 
     def __init__(self):
         self.users = {}
 
-    def create_user(self, user):
+    def add_user(self, user):
         """ This Method Creates a User and adds him/her into dict of users """
         if user.id in self.users:
             raise UserAlreadyExist
