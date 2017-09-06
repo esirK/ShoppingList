@@ -14,20 +14,27 @@ class User(UserMixin):
         return self.name
 
     def create_shopping_lst(self, shopping_lst):
-        """' This Method adds shopping_list into the current user shopping lists"""
+        """ 
+        This Method adds shopping_list into the current user shopping lists
+        """
         if shopping_lst.name in self.shopping_lists:
             raise ShoppingListAlreadyExist(shopping_lst.name+" Had been Created")
         self.shopping_lists.update({shopping_lst.name: shopping_lst})
 
     def delete_shopping_list(self, shopping_lst_name):
-        """' This Method removes a shopping_list from the current user shopping lists"""
+        """' 
+        This Method removes a shopping_list from the current user shopping lists
+
+        """
         try:
             self.shopping_lists.pop(shopping_lst_name)
         except KeyError:
             raise ShoppingListDoesNotExist
 
     def get_shopping_lst(self, shopping_lst_name):
-        """ Returns a shopping_list by name the name of 'shopping_lst_name' """
+        """ 
+        Returns a shopping_list by name the name of 'shopping_lst_name
+         """
         try:
             self.shopping_lists[shopping_lst_name]
         except KeyError:
@@ -35,6 +42,11 @@ class User(UserMixin):
         return self.shopping_lists[shopping_lst_name]
 
     def update_shopping_list(self, shopping_list):
+        """
+        This method takes in 
+        :param shopping_list:
+        and updates the shopping list 
+        """
         self.delete_shopping_list(shopping_list.name)
         self.create_shopping_lst(shopping_list)
 

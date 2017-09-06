@@ -11,7 +11,8 @@ class Item:
 
     def __eq__(self, other):
         if self.name == other.name and self.price == other.price and \
-                        self.quantity == other.quantity and self.category == other.category:
+                        self.quantity == other.quantity and \
+                        self.category == other.category:
             return True
         else:
             return False

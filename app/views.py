@@ -6,13 +6,13 @@ from werkzeug.utils import redirect
 from app.Exceptions import ShoppingListAlreadyExist, ItemAlreadyExist, ShoppingListDoesNotExist, ItemDoesNotExist
 from app.forms import SignUpForm, LoginForm, CreateShoppingList, AddItem
 from app.models.ShoppingList import ShoppingList
-from app.models.account import Account
+from app.models.accounts import Accounts
 from app.models.item import Item
 from app.models.user import User
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = "wireless"
-account = Account()
+app.config['SECRET_KEY'] = "wireless"  # environment variable (.env) dotenv
+accounts = Accounts()
 login_manager = LoginManager()
 bootstrap = Bootstrap(app)
 login_manager.login_view = "/login"
@@ -21,14 +21,15 @@ login_manager.init_app(app)
 
 @login_manager.user_loader
 def load_user(email):
-    """Load user object using supplied email"""
-    return account.check_user(email)
+    """ Load user object using supplied email"""
+    return accounts.check_user(email)
 
 
 @app.route("/", methods=['GET', 'POST'])
 def index():
     """The root Of The App"""
     if current_user.is_authenticated:
+        # User authenticated
         return render_template("userdashboard.html")
     else:
         return redirect(url_for("login"))
@@ -36,13 +37,17 @@ def index():
 
 @app.route("/login", methods=['GET', 'POST'])
 def login():
+    """
+    Login endpoint for registered users
+    :return: 
+    """
     form = LoginForm()
 
     if current_user.is_authenticated:
         return redirect(url_for('index'))
     else:
         if form.validate_on_submit():
-            user = account.check_user(form.email.data)
+            user = accounts.check_user(form.email.data)
             if user:
                 # A User Exist with that Email now check password
                 if form.password.data == user.password:
@@ -58,18 +63,19 @@ def login():
 
 @app.route("/signup", methods=['GET', 'POST'])
 def signup():
-    global account
+    global accounts
     form = SignUpForm()
 
     if current_user.is_authenticated:
         return redirect(url_for('index'))
     else:
         if form.validate_on_submit():
-            if account.check_user(form.email.data):
+            if accounts.check_user(form.email.data):
                 # User Exist
                 flash("User Already Exists", "info")
             else:
-                account.create_user(User(form.username.data, form.email.data, form.password.data))
+                accounts.add_user(
+                    User(form.username.data, form.email.data, form.password.data))
                 flash("User Created Successfully", "success")
                 return redirect("login")
 
@@ -111,43 +117,61 @@ def create_shopping_lst():
 def add_item(shopping_list_name):
     form = AddItem()
     if form.validate_on_submit():
-        item = Item(form.item_name.data, form.item_price.data, form.item_quantity.data, form.category.data)
+        """ 
+        Instantiate an Item Object from the 
+        form data submitted by the current_user
+        """
+        item = Item(form.item_name.data, form.item_price.data,
+                    form.item_quantity.data, form.category.data)
         try:
             shopping_list = current_user.get_shopping_lst(shopping_list_name)
             shopping_list.add_item(item)
             current_user.update_shopping_list(shopping_list)
-            flash(" " + item.name + " Successfully Added into " + "Shopping List "
-                  + shopping_list_name, "info")
-            print(shopping_list.categories)
+            flash(" " + item.name +
+                  " Successfully Added into Shopping List " +
+                  shopping_list_name, "info")
+
             return redirect(url_for('index'))
 
         except ItemAlreadyExist:
             flash(item.name + " Already Exists Try updating it instead", "info")
             return redirect(url_for('index'))
     else:
-        return render_template("add_item.html", form=form, shopping_list_name=shopping_list_name)
+        return render_template("add_item.html", form=form,
+                               shopping_list_name=shopping_list_name)
 
 
-@app.route("/update_item/<shopping_list_name>/<name>/<price>/<quantity>/<category>", methods=['GET', 'POST'])
+@app.route("/update_item/<shopping_list_name>/<name>/<price>/<quantity>/<category>",
+           methods=['GET', 'POST'])
 @login_required
 def update_item(shopping_list_name, name, price, quantity, category):
     form = AddItem()
+    """ 
+    Item that we wish to update is created from parameters passed in the URL 
+    """
+    item_to_update = Item(name=name, price=price, category=category,
+                          quantity=quantity)
 
-    item_to_update = Item(name=name, price=price, category=category, quantity=quantity)
-    item = Item(name=form.item_name.data, price=form.item_price.data, quantity=form.item_quantity.data,
+    item = Item(name=form.item_name.data, price=form.item_price.data,
+                quantity=form.item_quantity.data,
                 category=form.category.data)
+
     if form.validate_on_submit():
         try:
             shopping_list = current_user.get_shopping_lst(shopping_list_name)
             shopping_list.update_item(item)
             flash(item.name + "Has been Successfully Updated", "success")
         except ShoppingListDoesNotExist:
-            flash("No Shopping List With name " + shopping_list_name + " Try Adding it instead", "warning")
+            flash("No Shopping List With name " + shopping_list_name +
+                  " Try Adding it instead", "warning")
         except ItemDoesNotExist:
-            flash("Sorry Item " + item.name + " Cannot Be Updated. Make sure you have such item first", "warning")
+            flash("Sorry Item " + item.name +
+                  " Cannot Be Updated. Make sure you have such item first",
+                  "warning")
         return redirect(url_for('index'))
     else:
-        return render_template("update_item.html", form=form, shopping_list_name=shopping_list_name,
+        return render_template("update_item.html", form=form,
+                               shopping_list_name=shopping_list_name,
                                item=item_to_update)
 
 
@@ -155,6 +179,9 @@ def update_item(shopping_list_name, name, price, quantity, category):
 @login_required
 def delete_shopping_list(shopping_list_name):
     try:
+        """
+        Uses delete_shopping_list from user class to delete a shopping list
+        """
         current_user.delete_shopping_list(shopping_list_name)
         flash(shopping_list_name + " Deleted Successfully ", "success")
     except ShoppingListDoesNotExist:
@@ -162,9 +189,14 @@ def delete_shopping_list(shopping_list_name):
     return redirect(url_for('index'))
 
 
-@app.route("/delete_item/<shopping_list_name>/<name>/<price>/<quantity>/<category>", methods=['GET', 'POST'])
+@app.route("/delete_item/<shopping_list_name>/<name>/<price>/<quantity>/"
+           "<category>", methods=['GET', 'POST'])
 @login_required
 def delete_item(shopping_list_name, name, price, quantity, category):
+    """
+    Deletes an item from a shopping_list. Creates a the item to delete from the 
+    url supplied parameters 
+    """
     item = Item(name=name, price=price, category=category, quantity=quantity)
     if current_user.is_authenticated:
         try:
@@ -173,7 +205,8 @@ def delete_item(shopping_list_name, name, price, quantity, category):
         except ShoppingListDoesNotExist:
             flash("Shopping List " + shopping_list_name + " Does Not Exist", "warning")
         except ItemDoesNotExist:
-            flash("The Item " + item.name + "That You Wish To Delete Does Not Exist", "warning")
+            flash("The Item " + item.name + "That You Wish To Delete Does Not Exist",
+                  "warning")
 
         return redirect(url_for('index'))
 
