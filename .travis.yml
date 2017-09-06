@@ -7,7 +7,7 @@ install:
 # command to run tests
 script:
   - nosetests -v
-  - nosetests --with-coverage --cover-inclusive --cover-package=test
+  - nosetests --with-coverage --cover-inclusive --cover-package=app
   - "coveralls"
 
 after_sucess:
