@@ -8,6 +8,7 @@ install:
 script:
   - nosetests -v
   - nosetests --with-coverage --cover-inclusive --cover-package=$(PACKAGE)
+  - "coveralls"
 
 after_sucess:
-  - coveralls
+  - "coveralls"
