@@ -1,6 +1,5 @@
 [![Build Status](https://travis-ci.org/esirK/ShoppingList.svg?branch=develop)](https://travis-ci.org/esirK/ShoppingList)
-[![Coverage Status](https://coveralls.io/repos/github/esirK/ShoppingList/badge.svg?branch=master)](https://coveralls.io/github/esirK/ShoppingList?branch=develop)
-
+[![Coverage Status](https://coveralls.io/repos/github/esirK/ShoppingList/badge.svg?branch=develop)](https://coveralls.io/github/esirK/ShoppingList?branch=develop)
 # ShoppingList
 shopping list app is an application that allows users
 to record and share things they want to spend money on
