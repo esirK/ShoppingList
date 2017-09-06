@@ -14,7 +14,7 @@
 {% block page_content %}
 <form class="card" method="post">
     <div class="form-header">
-        <h4 class="title">Update Item In {{ current_user.get_shopping_lst(shopping_list_name).name }}</h4>
+        <h4 class="title">Update Item</h4>
     </div>
     <div class="container">
 
@@ -22,6 +22,7 @@
 
         {{ form.item_name.label }}
         {{ form.item_name(value=item.name) }}
+
 
         {{ form.item_price.label }}
         {{ form.item_price(value=item.price) }}
@@ -31,7 +32,7 @@
         {{ form.item_quantity(value=item.quantity) }}
 
         {{ form.category.label }}
-        {{ form.category(value=item.category) }}
+        {{ form.category(value=item.category, readonly=True) }}
 
         <div class="btm_buttons">
             <button type="button"  class="cancelbtn" onclick="history.back()" >Cancel</button>

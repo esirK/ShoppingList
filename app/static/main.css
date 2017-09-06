@@ -41,7 +41,7 @@ button a {
 	background-color: #f2f2f2;
 	border-radius: 2px;
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-	margin:10px auto auto;
+	margin:30px auto auto;
 	transition: all 0.25s;
 }
 /* On mouse-over, add a deeper shadow */
@@ -74,7 +74,7 @@ h2 {
     margin: 8px 10px;
 }
 .updatebtn{
-    background-color: #ffbe28;
+    background-color: #7dc855;
     float: right;
     width: 25%;
     margin: 8px 10px;
@@ -112,7 +112,7 @@ h2 {
 .view-btn {
     width: 30%;
     margin-bottom: 0px;
-    background: #7dc855;
+    background: #ffbe28;
     margin: 8px 10px;
 }
 .new-btn {
@@ -131,4 +131,11 @@ h2 {
 }
 div + button {
 float: right;
+}
+@media (min-width: 768px) {
+  .navbar-nav.navbar-center {
+    position: absolute;
+    left: 50%;
+    transform: translatex(-50%);
+  }
 }
