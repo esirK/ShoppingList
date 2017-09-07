@@ -18,6 +18,7 @@ For Windows Use
 4. Move to the app directory `cd ShoppingList`
 5. Install the required packages: 
 > `pip install -r requirements.txt`
+
 Create an Environment variable in your local machine with the name **SECRET_KEY** and  set the value to a your own secret key
 ### Launching the App
 run the app with the command: `python run.py runserver`
