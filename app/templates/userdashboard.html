@@ -21,9 +21,9 @@
             {% if current_user.get_num_of_shopping_lists() > 0 %}
             {% for shoppinglist_name, shopping_list in current_user.shopping_lists.items() %}
 
-            <form method="post">
+            <form method="post" id="categories">
                 <div class="form-header">
-                    <h4 class="title"> {{ shoppinglist_name }} </h4>
+                    <h3 class="title"><strong> {{ shoppinglist_name }} </strong></h3>
                 </div>
                 <div class="form-body">
                     <ol>
@@ -59,8 +59,9 @@
 
                     <!-- Buttons -->
 
-                    <a href="{{ url_for('add_item',
-                        shopping_list_name=current_user.get_shopping_lst(shoppinglist_name).name) }}"
+                    <a href="{{ url_for('update_shoppinglist',
+                        shopping_list_name=current_user.get_shopping_lst(shoppinglist_name).name,
+                        description=current_user.get_shopping_lst(shoppinglist_name).description) }}"
                        class="btn btn-primary">
                         <i class="icon-edit icon-white"></i>
                         <span><strong>Edit</strong></span>
