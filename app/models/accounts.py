@@ -14,7 +14,7 @@ class Accounts(object):
         else:
             self.users.update({user.id: user})
 
-    def rm_user(self, email):
+    def remove_user(self, email):
         """ This Method removes a user from users dictionary using his/her 
         unique email"""
         try:

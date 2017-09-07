@@ -26,12 +26,12 @@ class TestAccount(unittest.TestCase):
     def test_rm_user(self):
         self.account.add_user(self.user)
         self.assertEqual(1, len(self.account.all_users()))
-        self.account.rm_user("master@gmail.com")
+        self.account.remove_user("master@gmail.com")
         self.assertEqual(0, len(self.account.all_users()))
 
     def test_removing_a_non_user_raises_exception(self):
         with self.assertRaises(UserDoesNotExist):
-            self.account.rm_user("wobbywobby@gmail.com")
+            self.account.remove_user("wobbywobby@gmail.com")
 
     def test_can_add_many_user(self):
         for x in range(10):

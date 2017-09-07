@@ -48,6 +48,5 @@ class TestUser(unittest.TestCase):
         with self.assertRaises(ShoppingListDoesNotExist):
             self.user.get_shopping_lst("wubba_lubba_dub_dub")
 
-
 if __name__ == '__main__':
     unittest.main()
