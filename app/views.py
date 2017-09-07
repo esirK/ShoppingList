@@ -1,3 +1,5 @@
+import os
+
 from flask import Flask, render_template, url_for, flash
 from flask_bootstrap import Bootstrap
 from flask_login import LoginManager, login_user, current_user, logout_user, login_required
@@ -11,7 +13,7 @@ from app.models.item import Item
 from app.models.user import User
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = "wireless"  # environment variable (.env) dotenv
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
 accounts = Accounts()
 login_manager = LoginManager()
 bootstrap = Bootstrap(app)
