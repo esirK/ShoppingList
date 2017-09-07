@@ -21,8 +21,10 @@ class ShoppingList:
 
     def remove_item(self, item):
         try:
-            """If this item category only contains one item
-             then you can delete even the category it'self """
+            """
+            If this item category only contains one item
+             then you can delete even the category it'self 
+             """
             if len(self.categories[item.category]) == 1:
                 del (self.categories[item.category])
             else:
