@@ -1,3 +1,4 @@
+from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 
 from app.Exceptions import ShoppingListDoesNotExist, ShoppingListAlreadyExist
@@ -5,13 +6,16 @@ from app.Exceptions import ShoppingListDoesNotExist, ShoppingListAlreadyExist
 
 class User(UserMixin):
     def __init__(self, name, email, password):
+        self.password_hash = generate_password_hash(password)
         self.name = name
         self.id = email
-        self.password = password
         self.shopping_lists = {}
 
     def __name__(self):
         return self.name
+
+    def verify_password(self, password):
+        return check_password_hash(self.password_hash, password)
 
     def create_shopping_lst(self, shopping_lst):
         """ 
