@@ -13,7 +13,7 @@ from app.models.item import Item
 from app.models.user import User
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', "wireless")
 accounts = Accounts()
 login_manager = LoginManager()
 bootstrap = Bootstrap(app)
