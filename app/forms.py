@@ -31,7 +31,8 @@ class SignUpForm(Form):
 
 class LoginForm(Form):
     email = StringField("Email",
-                        validators=[DataRequired(), length(min=4), validate_names])
+                        validators=[DataRequired(), length(min=4),
+                                    validate_names])
     password = PasswordField('Password',
                              validators=[DataRequired(),
                                          length(min=4, max=80)])
@@ -39,16 +40,20 @@ class LoginForm(Form):
 
 
 class CreateShoppingList(Form):
-    name = StringField("Name", validators=[DataRequired(), length(min=4), validate_names])
-    body = StringField("Description", widget=TextArea(), validators=[validate_names])
+    name = StringField("Name", validators=[DataRequired(), length(min=4),
+                                           validate_names])
+    body = StringField("Description", widget=TextArea(),
+                       validators=[validate_names])
 
 
 class AddItem(Form):
     item_name = StringField("Item Name",
-                            validators=[DataRequired(), length(min=4), validate_names])
+                            validators=[DataRequired(), length(min=4),
+                                        validate_names])
     category = StringField("Category('General' by Default)",
-                           validators=[length(min=1)])
+                           validators=[length(min=1), validate_names])
     item_price = StringField("Item Price",
-                             validators=[DataRequired(), length(min=1)])
+                             validators=[DataRequired(),
+                                         length(min=1)])
     item_quantity = StringField("Item Quantity", validators=[DataRequired(),
                                                              length(min=1)])
