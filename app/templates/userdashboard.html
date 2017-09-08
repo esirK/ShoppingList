@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+
+{% block head %}
+{{ super() }}
+
+{% endblock %}
+
+<body>
+{% block page_content %}
+
+<form method="post">
+    <div class="items-container">
+        <button type="submit" class="new-btn"><a href="{{ url_for('create_shopping_lst') }}">Create A ShoppingList</a>
+        </button>
+        <div class="form-header">
+            <h2 class="title">Awesome ShoppingList App</h2>
+        </div>
+
+        <div class="card">
+            {% if current_user.get_num_of_shopping_lists() > 0 %}
+            {% for shoppinglist_name, shopping_list in current_user.shopping_lists.items() %}
+
+            <form method="post" id="categories">
+                <div class="form-header">
+                    <h3 class="title"><strong> {{ shoppinglist_name }} </strong></h3>
+                </div>
+                <div class="form-body">
+                    <ol>
+                        {% if shopping_list.get_categories() > 0 %}
+                        {% for key, cat in shopping_list.categories.items() %}
+                        <ul>
+
+                            <strong>{{ key }}</strong>
+                            {% for item_name, item in cat.items() %}
+                            <li>{{ item.quantity }} {{ item.name }}(s)
+                                Costing Sh {{ item.price }} Each
+                                <button style="height:20px;width:50px;margin-bottom:10px" type="button"
+                                        class="btn btn-info btn-xs"><a href="{{ url_for('update_item',shopping_list_name=shoppinglist_name,
+                                         name=item.name, price=item.price, quantity=item.quantity, category=key) }}">
+                                    Edit</a>
+                                </button>
+                                <button style="height:20px;width:50px;margin-bottom:10px; " type="button"
+                                        class="btn btn-danger btn-xs"
+                                >
+                                    <a href="{{ url_for('delete_item', shopping_list_name=shoppinglist_name,
+                                         name=item.name, price=item.price, quantity=item.quantity, category=key) }}">
+                                        Delete</a>
+                                </button>
+                            </li>
+                            {% endfor %}
+
+                        </ul>
+                        {% endfor %}
+                        {% else %}
+                        <ul>You Currently Have no items In your shopping list</ul>
+                        {% endif %}
+                    </ol>
+
+                    <!-- Buttons -->
+
+                    <a href="{{ url_for('share_shoppinglist',
+                        shopping_list_name=current_user.get_shopping_lst(shoppinglist_name).name,
+                        description=current_user.get_shopping_lst(shoppinglist_name).description) }}"
+                       class="btn btn-primary">
+                        <i class="icon-edit icon-white"></i>
+                        <span><strong>Share</strong></span>
+                    </a>
+                    <a href="{{ url_for('delete_shopping_list',
+                        shopping_list_name=current_user.get_shopping_lst(shoppinglist_name).name) }}"
+                       class="btn btn-danger">
+                        <i class="icon-trash icon-white"></i>
+                        <span><strong>Delete</strong></span>
+                    </a>
+                    <button type="submit" class="updatebtn">
+                        <a href="{{ url_for('add_item',
+                        shopping_list_name=current_user.get_shopping_lst(shoppinglist_name).name) }}">Add Item</a>
+                    </button>
+                    <!-- End Buttons -->
+                </div>
+            </form>
+            {% endfor %}
+            {% else %}
+            <ul>You Currently Do not have any Shopping List</ul>
+            {% endif%}
+        </div>
+    </div>
+</form>
+{% endblock %}
+</body>
+</html>

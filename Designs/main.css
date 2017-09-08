@@ -1,0 +1,130 @@
+/* body general looks*/
+body {
+    font-family: 'Roboto',
+    sans-serif;
+    margin: 0;
+    background-color: #e2e2e2;
+}
+
+/* Full-width input fields */
+input[type=text], input[type=password] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+/* Set a style for all buttons */
+button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    width: 100%;
+    border-color: transparent;
+    border-radius: 6px;
+    padding: 14px 20px;
+    cursor: pointer;
+    font-size: 16px;
+}
+button:hover{
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+}
+button a {
+	text-decoration: none;
+	color: #fff
+}
+/* Make form appear with card effect*/
+.card{
+	width: 50%;
+	background-color: #f2f2f2;
+	border-radius: 2px;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+	margin:10px auto auto;
+	transition: all 0.25s;
+}
+/* On mouse-over, add a deeper shadow */
+.card:hover {
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+}
+.form-header {
+    height: 60px;
+    padding: 20px 30px 0;
+    border-bottom: 1px solid #e1e8ee;
+}
+.form-body {
+    padding: 30px 30px 30px;
+}
+
+h2 {
+    text-align: center;
+    {font-family: "Karma", sans-serif}
+}
+
+/* Extra styles for the cancel button */
+.cancelbtn {
+    background-color: #f44336;
+}
+.deletebtn {
+    background-color: #f44336;
+    float: left;
+    width: 30%;
+    margin: 8px 10px;
+}
+.updatebtn{
+    background-color: #ffbe28;
+    float: right;
+    width: 30%;
+    margin: 8px 10px;
+}
+/* Float cancel and signup buttons and add an equal width */
+.cancelbtn,.signupbtn, .loginbtn {
+    float: left;
+    margin-left: 5px;
+    margin-right: 5px;
+    width: 40%;
+}
+
+.cancelbtn,.signupbtn:hover, .deletebtn {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+/* Add padding to container elements */
+.container {
+    padding: 2px 16px;
+    width: 50%;
+    margin: auto;
+}
+.btm_buttons {
+    overflow: auto;
+    height: 50px;
+    width: 415px;
+}
+/* Clear floats */
+.btm_buttons::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+/* Buttons Section */
+.view-btn {
+    width: 30%;
+    margin-bottom: 0px;
+    background: #7dc855;
+    margin: 8px 10px;
+}
+.new-btn {
+    width: auto;
+    margin-bottom: 0px;
+    background: #7dc855;
+    margin: 8px 10px;
+    float:right;
+}
+
+/* Change styles for cancel button and signup button on extra small screens */
+@media screen and (max-width: 300px) {
+    .cancelbtn, .signupbtn {
+        width: 100%;
+    }
+}

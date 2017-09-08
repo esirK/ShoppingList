@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+
+{% from "_render_field.html" import render_field %}
+
+{% block head %}
+{{ super() }}
+{% endblock %}
+
+{% block navbar %}
+{% endblock %}
+
+<body>
+{% block page_content %}
+<form class="card" method="post">
+    <div class="form-header">
+        <h4 class="title">Add Item to {{ current_user.get_shopping_lst(shopping_list_name).name }}</h4>
+    </div>
+    <div class="container">
+
+        {{ form.csrf_token }}
+
+        {{ render_field(form.item_name) }}
+
+        {{ render_field(form.item_price) }}
+
+        {{ render_field(form.item_quantity) }}
+
+        {{ render_field(form.category) }}
+
+
+        <div class="btm_buttons">
+            <button type="button"  class="cancelbtn" onclick="history.back()" >Cancel</button>
+
+            <button type="submit" class="loginbtn">Save</button>
+        </div>
+    </div>
+
+</form>
+{% endblock %}
+
+</body>
+</html>

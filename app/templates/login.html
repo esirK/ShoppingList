@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+
+{% from "_render_field.html" import render_field %}
+
+{% block head %}
+{{ super() }}
+{% endblock %}
+
+<!-- Override navbar to prevent them from appearling in this page -->
+{% block navbar %}
+{% endblock %}
+
+<body>
+{% block page_content %}
+<form class="card" method="post">
+    <div class="form-header">
+        <h4 class="title">Please Login</h4>
+    </div>
+    <div class="container">
+
+        {{ form.csrf_token }}
+
+        {{ render_field(form.email) }}
+
+        {{ render_field(form.password) }}
+
+        <input type="checkbox" checked="checked"> Remember me
+
+        <div class="btm_buttons">
+            <button type="button"  class="cancelbtn">Cancel</button>
+            <button type="submit" class="loginbtn">Login</button>
+        </div>
+    </div>
+    <p style="margin: 10px; width: auto; padding: 12px 20px; " align="center" ><a href="{{ url_for('signup') }}">No Account? Sign Up</a></p>
+
+</form>
+{% endblock %}
+
+</body>
+</html>

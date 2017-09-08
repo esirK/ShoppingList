@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create BucketList</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100" rel="stylesheet">
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+
+<form class="card" id="new_bkt">
+    <div class="form-header">
+        <h4 class="title">Create A new Shopping list</h4>
+    </div>
+    <div class="container">
+        <label><b>Name</b></label>
+        <input type="text" placeholder="Enter ShoppingList Name" name="shopping_list_name" required>
+
+        <label><b>Description</b></label>
+
+        <textarea rows="4" cols="50" name="bsk_desc" placeholder="Little Description Of The Named Shopping List"></textarea>
+
+        <div class="btm_buttons">
+            <button type="button"  class="cancelbtn" onclick="history.back()"><a href="bucketlist.html">Cancel</a></button>
+            <button type="submit" class="loginbtn"><a href="bucketlist.html">Save</a></button>
+        </div>
+    </div>
+</form>
+</body>
+</html>

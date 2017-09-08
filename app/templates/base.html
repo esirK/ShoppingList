@@ -1,0 +1,52 @@
+{% extends "bootstrap/base.html" %}
+{% block head %}
+{{ super() }}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% block title %}{% endblock %}
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static',filename='main.css') }}">
+</head>
+{% endblock %}
+
+{% block navbar %}
+<div class="navbar navbar-inverse" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/">ShoppingListApp</a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-left">
+                <li><a href="/">Home</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                {% if current_user.is_authenticated %}
+                <li><a href="/logout">Logout</a></li>
+                {% endif %}
+            </ul>
+            <ul class="nav navbar-nav navbar-center">
+                {% if current_user.is_authenticated %}
+                <p style="color: #2196F3">Loggedin As {{ current_user.name }} </p>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="container">
+        {% for category , message in get_flashed_messages(with_categories=true) %}
+        <div class="alert alert-{{ category }} alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            {{ message }}
+        </div>
+        {% endfor %}
+    </div>
+
+    {% block page_content %}{% endblock %}
+
+</div>
+{% endblock %}
