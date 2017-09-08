@@ -22,7 +22,8 @@ class User(UserMixin):
         This Method adds shopping_list into the current user shopping lists
         """
         if shopping_lst.name in self.shopping_lists:
-            raise ShoppingListAlreadyExist(shopping_lst.name+" Had been Created")
+            raise ShoppingListAlreadyExist(shopping_lst.name
+                                           + " Had been Created")
         self.shopping_lists.update({shopping_lst.name: shopping_lst})
 
     def delete_shopping_list(self, shopping_lst_name):
