@@ -13,7 +13,9 @@ class TestShoppingListViews(unittest.TestCase):
         result = self.app.get("/")
 
         # Assert Status code of response
-        """ If the user is not logged in He/ She is redirected to Login page"""
+        """ 
+        If the user is not logged in He/ She is redirected to Login page
+        """
         self.assertEqual(result.status_code, 302)
 
     def test_status_code_for_login(self):
@@ -30,6 +32,12 @@ class TestShoppingListViews(unittest.TestCase):
         to access the logout page 
         """
         self.assertEqual(302, self.get_result("/logout").status_code)
+
+    def test_access_to_un_available_endpoint(self):
+        self.assertEquals(404, self.get_result("/wtf").status_code)
+
+    def test_anonymous_user_is_always_redirected_to_login(self):
+        self.assertEquals(302, self.get_result("/create_shoppinglist").status_code)
 
     def get_result(self, path):
         """ sends get request to the defined path """
