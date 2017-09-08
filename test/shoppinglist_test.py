@@ -54,7 +54,8 @@ class TestShoppingList(unittest.TestCase):
         self.nakkumart.add_item(self.cod)
         updated_item = Item("Call Of Duty", 3500, 1, "Game")
         self.nakkumart.update_item(updated_item)
-        self.assertEqual(updated_item.price, self.nakkumart.get_item(self.cod).price)
+        self.assertEqual(updated_item.price,
+                         self.nakkumart.get_item(self.cod).price)
 
     def test_updating_an_item_not_in_shopping_list_raises_exception(self):
         with self.assertRaises(ItemDoesNotExist):
@@ -67,7 +68,8 @@ class TestShoppingList(unittest.TestCase):
             self.nakkumart.add_item(self.morty)
 
     def test_if_no_item_category_provided_general_category_is_used(self):
-        """This Method Test if the user doesn't have the ability to categorize
+        """
+        This Method Test if the user doesn't have the ability to categorize
         an item then the item is added to a default (general) category
         """
         general_item = Item("Mysterious Item", 5300, 1)
