@@ -2,10 +2,12 @@ import os
 
 from flask import Flask, render_template, url_for, flash
 from flask_bootstrap import Bootstrap
-from flask_login import LoginManager, login_user, current_user, logout_user, login_required
+from flask_login import LoginManager, login_user, current_user, \
+    logout_user, login_required
 from werkzeug.utils import redirect
 
-from app.Exceptions import ShoppingListAlreadyExist, ItemAlreadyExist, ShoppingListDoesNotExist, ItemDoesNotExist
+from app.Exceptions import ShoppingListAlreadyExist, ItemAlreadyExist, \
+    ShoppingListDoesNotExist, ItemDoesNotExist
 from app.forms import SignUpForm, LoginForm, CreateShoppingList, AddItem
 from app.models.ShoppingList import ShoppingList
 from app.models.accounts import Accounts
@@ -116,26 +118,14 @@ def create_shopping_lst():
     return render_template("create_shoppinglist.html", form=form)
 
 
-@app.route("/update_shoppinglist/<shopping_list_name>/<description>/",
-           methods=['GET', 'POST'])
+@app.route("/share_shoppinglist", methods=['GET', 'POST'])
 @login_required
-def update_shoppinglist(shopping_list_name, description):
-    form = CreateShoppingList()
-    shopping_list_to_update = ShoppingList(name=shopping_list_name,
-                                           description=description)
-
-    if form.validate_on_submit():
-        shopping_list = ShoppingList(form.name.data, form.body.data)
-        try:
-            current_user.update_shopping_list(shopping_list)
-        except ShoppingListDoesNotExist:
-            flash("Shopping List " + shopping_list_name + " Does not Exist ", "info")
-        return redirect(url_for('index'))
-    else:
-        return render_template("update_shoppinglist.html",
-                               form=form,
-                               shopping_list=shopping_list_to_update,
-                               shopping_list_name=shopping_list_name)
+def share_shoppinglist():
+    """ 
+    This Endpoint Will sllow users to share their shopping lists with other users
+    """
+    flash("Coming Soon.", "info")
+    return redirect(url_for('index'))
 
 
 @app.route("/add_item/<shopping_list_name>", methods=['GET', 'POST'])
