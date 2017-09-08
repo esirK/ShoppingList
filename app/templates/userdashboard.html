@@ -38,7 +38,7 @@
                                 <button style="height:20px;width:50px;margin-bottom:10px" type="button"
                                         class="btn btn-info btn-xs"><a href="{{ url_for('update_item',shopping_list_name=shoppinglist_name,
                                          name=item.name, price=item.price, quantity=item.quantity, category=key) }}">
-                                    Update</a>
+                                    Edit</a>
                                 </button>
                                 <button style="height:20px;width:50px;margin-bottom:10px; " type="button"
                                         class="btn btn-danger btn-xs"
@@ -59,12 +59,12 @@
 
                     <!-- Buttons -->
 
-                    <a href="{{ url_for('update_shoppinglist',
+                    <a href="{{ url_for('share_shoppinglist',
                         shopping_list_name=current_user.get_shopping_lst(shoppinglist_name).name,
                         description=current_user.get_shopping_lst(shoppinglist_name).description) }}"
                        class="btn btn-primary">
                         <i class="icon-edit icon-white"></i>
-                        <span><strong>Edit</strong></span>
+                        <span><strong>Share</strong></span>
                     </a>
                     <a href="{{ url_for('delete_shopping_list',
                         shopping_list_name=current_user.get_shopping_lst(shoppinglist_name).name) }}"

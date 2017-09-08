@@ -19,18 +19,21 @@
 <body>
 {% block page_content %}
 
-<form class="card" id="new_bkt" action="{{ url_for('create_shopping_lst') }}" method="post">
+<form class="card" id="new_bkt" action="{{ url_for('create_shopping_lst') }}"
+      method="post">
     <div class="form-header">
         <h4 class="title">Create A new Shopping list</h4>
     </div>
     <div class="container">
 
-            {{ form.csrf_token }}
-            {{ render_field(form.name) }}
-            {{ render_field(form.body(cols="50", rows="4")) }}
+        {{ form.csrf_token }}
+        {{ render_field(form.name) }}
+        {{ form.body.label }}
+        {{ render_field(form.body(cols="50", rows="4")) }}
 
         <div class="btm_buttons">
-            <button type="button"  class="cancelbtn" onclick="history.back()">Cancel</button>
+            <button type="button"  class="cancelbtn" onclick="history.back()">
+                Cancel</button>
             <button type="submit" class="loginbtn">Save</button>
         </div>
 
