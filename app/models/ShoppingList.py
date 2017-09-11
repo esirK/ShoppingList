@@ -32,9 +32,9 @@ class ShoppingList:
         except KeyError:
             raise ItemDoesNotExist
 
-    def update_item(self, item):
-        self.remove_item(item)
-        self.add_item(item)
+    def update_item(self, old_item, new_item):
+        self.remove_item(old_item)
+        self.add_item(new_item)
 
     def get_item(self, item):
         """Returns an item object """
