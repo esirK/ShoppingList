@@ -168,14 +168,14 @@ def update_item(shopping_list_name, name, price, quantity, category):
     item_to_update = Item(name=name, price=price, category=category,
                           quantity=quantity)
 
-    item = Item(name=form.item_name.data, price=form.item_price.data,
-                quantity=form.item_quantity.data,
-                category=form.category.data)
-
     if form.validate_on_submit():
+        item = Item(name=form.item_name.data, price=form.item_price.data,
+                    quantity=form.item_quantity.data,
+                    category=form.category.data)
+
         try:
             shopping_list = current_user.get_shopping_lst(shopping_list_name)
-            shopping_list.update_item(old_item=item, new_item=item_to_update)
+            shopping_list.update_item(new_item=item, old_item=item_to_update)
             flash(item.name + "Has been Successfully Updated", "success")
         except ShoppingListDoesNotExist:
             flash("No Shopping List With name " + shopping_list_name +
