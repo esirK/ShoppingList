@@ -1,6 +1,6 @@
-[![Build Status](https://travis-ci.org/esirK/ShoppingList.svg?branch=develop)](https://travis-ci.org/esirK/ShoppingList)
-[![Coverage Status](https://coveralls.io/repos/github/esirK/ShoppingList/badge.svg?branch=master)](https://coveralls.io/github/esirK/ShoppingList?branch=develop)
-[![Code Health](https://landscape.io/github/esirK/ShoppingList/develop/landscape.svg?style=flat)](https://landscape.io/github/esirK/ShoppingList/develop)
+[![Build Status](https://travis-ci.org/esirK/ShoppingList.svg?branch=master)](https://travis-ci.org/esirK/ShoppingList)
+[![Coverage Status](https://coveralls.io/repos/github/esirK/ShoppingList/badge.svg?branch=master)](https://coveralls.io/github/esirK/ShoppingList?branch=master)
+[![Code Health](https://landscape.io/github/esirK/ShoppingList/master/landscape.svg?style=flat)](https://landscape.io/github/esirK/ShoppingList/master)
 
 # ShoppingList
 shopping list app is an application that allows users
