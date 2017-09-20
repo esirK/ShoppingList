@@ -9,19 +9,12 @@
 <body>
 {% block page_content %}
 
-<form method="post">
     <div class="items-container">
-        <button type="submit" class="new-btn"><a href="{{ url_for('create_shopping_lst') }}">Create A ShoppingList</a>
-        </button>
-        <div class="form-header">
-            <h2 class="title">Awesome ShoppingList App</h2>
-        </div>
-
+        <button class="new-btn" onclick="window.location.href='{{ url_for('create_shopping_lst') }}'">Create A ShoppingList</button>
+        {% if current_user.get_num_of_shopping_lists() > 0 %}
+        {% for shoppinglist_name, shopping_list in current_user.shopping_lists.items() %}
         <div class="card">
-            {% if current_user.get_num_of_shopping_lists() > 0 %}
-            {% for shoppinglist_name, shopping_list in current_user.shopping_lists.items() %}
-
-            <form method="post" id="categories">
+        <form method="post" id="categories">
                 <div class="form-header">
                     <h3 class="title"><strong> {{ shoppinglist_name }} </strong></h3>
                 </div>
@@ -79,13 +72,31 @@
                     <!-- End Buttons -->
                 </div>
             </form>
-            {% endfor %}
-            {% else %}
-            <ul>You Currently Do not have any Shopping List</ul>
-            {% endif%}
+            </div>
+        {% endfor %}
+        {% else %}
+        <div class="card"
+             style="
+                display: inline-block;
+                position: fixed;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                width: 500px;
+                height: 100px;
+                margin: auto;
+                background-color: #f3f3f3;">
+            <ul>
+                You Currently Do not have any Shopping List<br>
+                Having a Shopping List gives you a lot of benefits like<br>
+                <ol>Time Saver</ol>
+                <ol>Money Saver</ol>
+                <ol>Makes Shopping Fun</ol>
+            </ul>
         </div>
+        {% endif%}
     </div>
-</form>
 {% endblock %}
 </body>
 </html>

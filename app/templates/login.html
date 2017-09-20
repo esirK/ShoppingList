@@ -17,7 +17,7 @@
     <div class="form-header">
         <h4 class="title">Please Login</h4>
     </div>
-    <div class="container">
+    <div class="form_container">
 
         {{ form.csrf_token }}
 
@@ -28,8 +28,8 @@
         <input type="checkbox" checked="checked"> Remember me
 
         <div class="btm_buttons">
-            <button type="button"  class="cancelbtn">Cancel</button>
-            <button type="submit" class="loginbtn">Login</button>
+            <button   class="cancelbtn">Cancel</button>
+            <button   class="loginbtn">Login</button>
         </div>
     </div>
     <p style="margin: 10px; width: auto; padding: 12px 20px; " align="center" ><a href="{{ url_for('signup') }}">No Account? Sign Up</a></p>
