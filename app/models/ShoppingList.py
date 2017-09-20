@@ -32,18 +32,13 @@ class ShoppingList:
         except KeyError:
             raise ItemDoesNotExist
 
-    def update_item(self, old_item, new_item):
+    def update_item(self, item):
         """
         If item exist remove it first else just add it
-        :param old_item: 
-        :param new_item: 
         :return: 
         """
-        try:
-            self.remove_item(old_item)
-        except ItemDoesNotExist:
-            print("Adding Item...")
-        self.add_item(new_item)
+        self.remove_item(item)
+        self.add_item(item)
 
     def get_item(self, item):
         """Returns an item object """
