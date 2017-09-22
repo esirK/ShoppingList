@@ -25,11 +25,11 @@
         <h4 class="title">Create A new Shopping list</h4>
     </div>
     <div class="form_container">
-
         {{ form.csrf_token }}
-        {{ render_field(form.name) }}
+        {{ form.name.label }}
+        {{ form.name(value=shopping_list.name) }}
         {{ form.body.label }}
-        {{ render_field(form.body(cols="50", rows="4")) }}
+        {{ form.body(cols="50", rows="4", value=shopping_list.name) }}
 
         <div class="btm_buttons">
             <button type="button"  class="cancelbtn" onclick="history.back()">

@@ -168,14 +168,14 @@ def update_item(shopping_list_name, name, price, quantity, category):
     item_to_update = Item(name=name, price=price, category=category,
                           quantity=quantity)
 
-    item = Item(name=form.item_name.data, price=form.item_price.data,
-                quantity=form.item_quantity.data,
-                category=form.category.data)
-
     if form.validate_on_submit():
+        item = Item(name=form.item_name.data, price=form.item_price.data,
+                    quantity=form.item_quantity.data,
+                    category=form.category.data)
+
         try:
             shopping_list = current_user.get_shopping_lst(shopping_list_name)
-            shopping_list.update_item(item)
+            shopping_list.update_item(new_item=item, old_item=item_to_update)
             flash(item.name + "Has been Successfully Updated", "success")
         except ShoppingListDoesNotExist:
             flash("No Shopping List With name " + shopping_list_name +
@@ -235,6 +235,11 @@ def invalid():
 @app.errorhandler(404)
 def page_not_found(e):
     return render_template('404.html'), 404
+
+
+@app.errorhandler(500)
+def page_not_found(e):
+    return render_template('500.html'), 500
 
 
 if __name__ == '__main__':

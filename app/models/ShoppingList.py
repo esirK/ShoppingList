@@ -33,6 +33,10 @@ class ShoppingList:
             raise ItemDoesNotExist
 
     def update_item(self, item):
+        """
+        If item exist remove it first else just add it
+        :return: 
+        """
         self.remove_item(item)
         self.add_item(item)
 

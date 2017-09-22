@@ -1,11 +1,13 @@
 /* body general looks*/
 body {
+    height: 100%;
+    padding-top: 30px;
+    padding-bottom: 50px;
     font-family: 'Roboto',
     sans-serif;
     margin: 0;
     background-color: #e2e2e2;
 }
-
 /* Full-width input fields */
 input[type=text], input[type=password] {
     width: 100%;
@@ -38,6 +40,7 @@ button a {
 /* Make form appear with card effect*/
 .card{
 	width: 50%;
+	height: auto;
 	background-color: #f2f2f2;
 	border-radius: 2px;
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
@@ -60,7 +63,8 @@ button a {
 h2 {
     text-align: end;
     {
-    font-family: "Karma", sans-serif;}
+        font-family: "Karma", sans-serif;
+    }
 }
 
 /* Extra styles for the cancel button */
@@ -74,17 +78,16 @@ h2 {
     margin: 8px 10px;
 }
 .updatebtn{
-    background-color: #7dc855;
+    background-color: #4d9e21;
     float: right;
-    width: 25%;
-    margin: 8px 10px;
+    width: 30%;
 }
 /* Float cancel and signup buttons and add an equal width */
 .cancelbtn,.signupbtn, .loginbtn {
     float: left;
     margin-left: 5px;
     margin-right: 5px;
-    width: 40%;
+    width: 35%;
 }
 
 .cancelbtn,.signupbtn:hover, .deletebtn {
@@ -93,9 +96,48 @@ h2 {
 
 /* Add padding to container elements */
 .container {
+    position: absolute;
+    top: 40px;
+    float: left;
+    width: 25%;
+    margin: auto;
+    z-index: 1;
+}
+.container-fluid {
+    position: relative;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+    font-family: monospace;
+    font-size: medium;
+}
+.container-big {
+    position: relative;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+    font-family: monospace;
+    background: #d6cbcb;
+    font-size: larger;
+    font-style: normal;
+}
+.items-container {
+    position: fixed;
+    width: 100%;
+    height: 80%;
+    background: #F2F4F5;
+    overflow: scroll;
+}
+.form_container {
     padding: 2px 16px;
     width: 50%;
     margin: auto;
+}
+form#categories {
+    background: darkgray;
+    margin-bottom: 10px;
 }
 .btm_buttons {
     overflow: auto;
@@ -116,11 +158,11 @@ h2 {
     margin: 8px 10px;
 }
 .new-btn {
+    position: fixed;
+    bottom: 30px;
     width: auto;
     margin-bottom: 0px;
     background: #7dc855;
-    margin: 10px 130px;
-    float: right;
 }
 
 /* Change styles for cancel button and signup button on extra small screens */
@@ -142,4 +184,10 @@ float: right;
 input[readonly] {
     background: #ccc;
     cursor: not-allowed;
+}
+.navbar-inverse {
+    position: fixed;
+    width: 100%;
+    background-color: #222;
+    border-color: #080808;
 }
