@@ -1,5 +1,5 @@
-[![Build Status](https://travis-ci.org/esirK/ShoppingList.svg?branch=develop)](https://travis-ci.org/esirK/ShoppingList)
-[![Coverage Status](https://coveralls.io/repos/github/esirK/ShoppingList/badge.svg?branch=develop)](https://coveralls.io/github/esirK/ShoppingList?branch=develop)
+[![Build Status](https://travis-ci.org/esirK/ShoppingList.svg?branch=UpdateUI)](https://travis-ci.org/esirK/ShoppingList)
+[![Coverage Status](https://coveralls.io/repos/github/esirK/ShoppingList/badge.svg?branch=UpdateUI)](https://coveralls.io/github/esirK/ShoppingList?branch=UpdateUI)
 [![Code Health](https://landscape.io/github/esirK/ShoppingList/develop/landscape.svg?style=flat)](https://landscape.io/github/esirK/ShoppingList/develop)
 
 # ShoppingList
