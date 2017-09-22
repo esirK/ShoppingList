@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<!-- Extend base.html to reuse navigation tab and enable message flashing -->
+{% extends "base.html" %}
+{% from "_render_field.html" import render_field %}
+
+{% block head %}
+
+{{ super() }}
+
+<head>
+    <meta charset="UTF-8">
+    <title>Share ShoppingList</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static',filename='main.css') }}">
+</head>
+
+{% endblock %}
+
+<body>
+{% block page_content %}
+
+<form class="card" id="new_bkt" action="{{ url_for('share_shoppinglist',
+ shopping_list_name=current_user.get_shopping_lst(shopping_list_name).name) }}"
+      method="post">
+    <div class="form-header">
+        <h4 class="title">Share Shopping list</h4>
+    </div>
+    <div class="form_container">
+
+        {{ form.csrf_token }}
+        {{ render_field(form.name) }}
+
+        <div class="btm_buttons">
+            <button type="button"  class="cancelbtn" onclick="history.back()">
+                Cancel</button>
+            <button type="submit" class="loginbtn">Share</button>
+        </div>
+
+    </div>
+</form>
+{% endblock %}
+
+</body>
+</html>

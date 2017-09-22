@@ -19,6 +19,13 @@
                     <h3 class="title"><strong> {{ shoppinglist_name }} </strong></h3>
                 </div>
                 <div class="form-body">
+                    {% if shopping_list.shared %}Shared by
+                        {% if shopping_list.shared_by == current_user.id %}
+                            Me
+                        {% else %}
+                            {{ shopping_list.shared_by }}
+                    {% endif %}
+                    {% endif %}
                     <ol>
                         {% if shopping_list.get_categories() > 0 %}
                         {% for key, cat in shopping_list.categories.items() %}
@@ -53,8 +60,7 @@
                     <!-- Buttons -->
 
                     <a href="{{ url_for('share_shoppinglist',
-                        shopping_list_name=current_user.get_shopping_lst(shoppinglist_name).name,
-                        description=current_user.get_shopping_lst(shoppinglist_name).description) }}"
+                        shopping_list_name=current_user.get_shopping_lst(shoppinglist_name).name) }}"
                        class="btn btn-primary">
                         <i class="icon-edit icon-white"></i>
                         <span><strong>Share</strong></span>

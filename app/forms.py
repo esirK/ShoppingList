@@ -46,6 +46,12 @@ class CreateShoppingList(Form):
                        validators=[validate_names])
 
 
+class ShareShoppingList(Form):
+    name = StringField("Email To share with", validators=[DataRequired(),
+                                                          length(min=4),
+                                                          validate_names])
+
+
 class AddItem(Form):
     item_name = StringField("Item Name",
                             validators=[DataRequired(), length(min=4),

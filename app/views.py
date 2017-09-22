@@ -8,7 +8,7 @@ from werkzeug.utils import redirect
 
 from app.Exceptions import ShoppingListAlreadyExist, ItemAlreadyExist, \
     ShoppingListDoesNotExist, ItemDoesNotExist
-from app.forms import SignUpForm, LoginForm, CreateShoppingList, AddItem
+from app.forms import SignUpForm, LoginForm, CreateShoppingList, AddItem, ShareShoppingList
 from app.models.ShoppingList import ShoppingList
 from app.models.accounts import Accounts
 from app.models.item import Item
@@ -118,14 +118,31 @@ def create_shopping_lst():
     return render_template("create_shoppinglist.html", form=form)
 
 
-@app.route("/share_shoppinglist", methods=['GET', 'POST'])
+@app.route("/share_shoppinglist/<shopping_list_name>", methods=['GET', 'POST'])
 @login_required
-def share_shoppinglist():
+def share_shoppinglist(shopping_list_name):
     """ 
-    This Endpoint Will sllow users to share their shopping lists with other users
+    This Endpoint Will allow users to share their shopping lists with other users
     """
-    flash("Coming Soon.", "info")
-    return redirect(url_for('index'))
+    form = ShareShoppingList()
+    if form.validate_on_submit():
+        # check if email exist
+        share_user = accounts.check_user(form.name.data)
+        if share_user:
+            shopping_list = current_user.get_shopping_lst(shopping_list_name)
+            shopping_list1 = shopping_list
+            shopping_list1.shared = True
+            shopping_list1.shared_by = current_user.name
+            try:
+                share_user.create_shopping_lst(shopping_list1)
+            except ShoppingListAlreadyExist:
+                flash(form.name.data + " Have Such a ShoppingList", "info")
+                return redirect(url_for('index'))
+            flash(shopping_list.name + " Shared Successfully", "info")
+            return redirect(url_for('index'))
+        flash(form.name.data + " Does Not Exist", "info")
+    return render_template("share_shoppinglist.html", form=form,
+                           shopping_list_name=shopping_list_name)
 
 
 @app.route("/add_item/<shopping_list_name>", methods=['GET', 'POST'])
@@ -175,7 +192,7 @@ def update_item(shopping_list_name, name, price, quantity, category):
 
         try:
             shopping_list = current_user.get_shopping_lst(shopping_list_name)
-            shopping_list.update_item(new_item=item, old_item=item_to_update)
+            shopping_list.update_item(item=item)
             flash(item.name + "Has been Successfully Updated", "success")
         except ShoppingListDoesNotExist:
             flash("No Shopping List With name " + shopping_list_name +
